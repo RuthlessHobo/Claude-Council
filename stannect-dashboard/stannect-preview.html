@@ -6,21 +6,16 @@
     <title>Stannect — Command Center</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Exo+2:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Exo+2:wght@400;500;600&display=swap" rel="stylesheet" />
     <style>
       :root {
         --bg: #edeee7; --brand: #a2825d; --accent-1: #bdbca8; --accent-2: #b4a98f; --accent-3: #ab9576;
-        --surface: #f5f5f0; --surface-2: rgba(255,255,255,0.82); --border: #d8d6cb;
-        --text: #2e2a24; --text-muted: #6b6458;
+        --surface: #f5f5f0; --border: #d8d6cb; --text: #2e2a24; --text-muted: #6b6458;
         --brand-rgb: 162,130,93; --brand-10: rgba(162,130,93,0.1); --brand-30: rgba(162,130,93,0.3);
       }
       [data-theme="dark"] {
-        --bg: #1d1a16; --surface: #28241f; --surface-2: rgba(44,40,34,0.82); --border: #3a352e;
-        --brand: #b89567; --accent-1: #6f6d5e; --accent-2: #7d7461; --accent-3: #8a7559;
-        --text: #e8e6df; --text-muted: #a9a395;
+        --bg: #1d1a16; --surface: #2a2620; --border: #3a352e; --brand: #b89567;
+        --accent-1: #6f6d5e; --accent-2: #7d7461; --accent-3: #8a7559; --text: #e8e6df; --text-muted: #a9a395;
         --brand-rgb: 184,149,103; --brand-10: rgba(184,149,103,0.12); --brand-30: rgba(184,149,103,0.32);
       }
       * { box-sizing: border-box; }
@@ -28,63 +23,55 @@
       body {
         background: var(--bg); color: var(--text); overflow-x: hidden;
         font-family: "Exo 2", system-ui, sans-serif; -webkit-font-smoothing: antialiased;
-        transition: background 0.4s ease, color 0.4s ease;
-        background-image:
-          radial-gradient(900px 600px at 78% -8%, var(--brand-10), transparent 60%),
-          radial-gradient(700px 520px at 6% 18%, rgba(var(--brand-rgb),0.06), transparent 55%);
+        transition: background .4s ease, color .4s ease;
+        background-image: radial-gradient(900px 600px at 78% -8%, var(--brand-10), transparent 60%), radial-gradient(700px 520px at 6% 18%, rgba(var(--brand-rgb),0.06), transparent 55%);
       }
       h1,h2,h3,h4,.heading { font-family: "Poppins","Montserrat",sans-serif; }
       ::selection { background: var(--brand); color: var(--bg); }
       button { font-family: inherit; }
 
-      /* Header */
-      header { position: fixed; inset: 0 0 auto 0; z-index: 50; backdrop-filter: blur(6px); }
+      header { position: fixed; inset: 0 0 auto 0; z-index: 60; backdrop-filter: blur(6px); }
       .bar { max-width: 1240px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
       .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
       .logo img { height: 30px; display: block; }
       .logo-fallback { display: none; align-items: center; gap: 10px; }
       .logo-fallback .chip { width: 36px; height: 36px; border-radius: 12px; background: var(--brand-10); color: var(--brand); display: flex; align-items: center; justify-content: center; }
-      .logo-fallback .word { font-family: "Poppins"; font-weight: 600; letter-spacing: 0.2em; font-size: 18px; }
-      .head-actions { display: flex; align-items: center; gap: 12px; }
-      .icon-btn { width: 40px; height: 40px; border-radius: 999px; cursor: pointer; background: var(--surface-2); border: 1px solid var(--border); color: var(--text-muted); display: flex; align-items: center; justify-content: center; transition: color .2s; }
+      .logo-fallback .word { font-family: "Poppins"; font-weight: 600; letter-spacing: .2em; font-size: 18px; }
+      .icon-btn { width: 40px; height: 40px; border-radius: 999px; cursor: pointer; background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); display: flex; align-items: center; justify-content: center; transition: color .2s; }
       .icon-btn:hover { color: var(--brand); }
       .btn { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; background: var(--brand); color: var(--bg); border: none; border-radius: 999px; padding: 10px 18px; font-family: "Poppins"; font-weight: 500; font-size: 14px; text-decoration: none; box-shadow: 0 18px 50px -20px rgba(0,0,0,.45); transition: transform .15s; }
       .btn:hover { transform: scale(1.03); } .btn:active { transform: scale(.96); }
-      .btn-ghost { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); box-shadow: none; }
+      .btn-ghost { background: var(--surface); color: var(--text); border: 1px solid var(--border); box-shadow: none; }
 
-      /* Scene */
       .scene { position: relative; width: 100%; height: 100vh; overflow: hidden; }
-      .world { position: absolute; inset: -60px; z-index: 1; transition: transform .9s cubic-bezier(.22,1,.36,1), filter .9s ease; will-change: transform; }
+      .world { position: absolute; inset: 0; z-index: 1; transform-origin: 50% 50%; transition: transform .95s cubic-bezier(.7,0,.2,1), filter .95s ease; will-change: transform, filter; }
       .world canvas { width: 100%; height: 100%; display: block; }
-      .world-hot { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); border-radius: 50%; z-index: 5; cursor: pointer; }
+      .world-hot { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); border-radius: 50%; z-index: 4; cursor: pointer; }
 
-      .intro { position: absolute; top: 92px; left: 0; right: 0; text-align: center; z-index: 6; pointer-events: none; padding: 0 24px; }
-      .intro .pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border); border-radius: 999px; padding: 6px 16px; font-size: 11px; text-transform: uppercase; letter-spacing: .25em; color: var(--text-muted); margin-bottom: 14px; }
+      .intro { position: absolute; top: 90px; left: 0; right: 0; text-align: center; z-index: 6; pointer-events: none; padding: 0 24px; transition: opacity .4s; }
+      .intro .pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border); border-radius: 999px; padding: 6px 16px; font-size: 11px; text-transform: uppercase; letter-spacing: .25em; color: var(--text-muted); margin-bottom: 14px; background: var(--surface); }
       .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--brand); animation: pulse 3.5s ease-in-out infinite; }
-      .intro h1 { font-size: clamp(28px,4.5vw,48px); font-weight: 600; margin: 0; line-height: 1.05; }
+      .intro h1 { font-size: clamp(28px,4.5vw,46px); font-weight: 600; margin: 0; line-height: 1.05; }
       .intro h1 .accent { color: var(--brand); }
       .intro p { margin: 10px auto 0; max-width: 520px; color: var(--text-muted); font-size: 15px; }
 
-      .toolbar { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 30; display: flex; gap: 12px; align-items: center; }
+      .toolbar { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 30; display: flex; gap: 12px; align-items: center; transition: opacity .4s; }
 
-      /* Globe summary chip (on hover of ball) */
-      .summary { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); z-index: 20; pointer-events: none; opacity: 0; transition: opacity .3s; text-align: center; }
+      .summary { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); z-index: 20; pointer-events: none; opacity: 0; transition: opacity .35s; text-align: center; }
       .summary.show { opacity: 1; }
-      .summary .box { display: inline-block; background: var(--surface-2); border: 1px solid var(--border); border-radius: 14px; padding: 10px 16px; backdrop-filter: blur(8px); box-shadow: 0 18px 50px -20px rgba(0,0,0,.45); }
+      .summary .box { display: inline-block; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 10px 16px; box-shadow: 0 18px 50px -20px rgba(0,0,0,.45); }
       .summary .big { font-family: "Poppins"; font-weight: 600; font-size: 18px; }
       .summary .sm { font-size: 12px; color: var(--text-muted); }
 
-      /* Orbit layer */
-      .orbit { position: absolute; inset: 0; z-index: 10; will-change: transform; }
-      #chains { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 1; }
+      .orbit { position: absolute; inset: 0; z-index: 10; }
+      #chains, #fx { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+      #chains { z-index: 1; } #fx { z-index: 35; }
       .ocard {
-        position: absolute; width: 232px; z-index: 2; cursor: pointer; border-radius: 18px; padding: 16px;
-        background: var(--surface-2); border: 1px solid var(--border); backdrop-filter: blur(10px) saturate(120%);
-        box-shadow: 0 18px 50px -20px rgba(0,0,0,.45);
-        transition: transform .28s cubic-bezier(.22,1,.36,1), box-shadow .3s, opacity .5s;
-        animation: fadeUp .55s cubic-bezier(.22,1,.36,1) both;
+        position: absolute; width: 234px; border-radius: 18px; padding: 16px; cursor: pointer; z-index: 2;
+        background: var(--surface); border: 1px solid var(--border); box-shadow: 0 20px 55px -22px rgba(0,0,0,.55);
+        transition: box-shadow .3s; will-change: transform, left, top, filter; transform: translate(-50%,-50%);
       }
-      .ocard:hover { transform: scale(1.07); box-shadow: 0 0 0 1px var(--brand-10), 0 26px 70px -24px var(--brand-30); z-index: 9; }
+      .ocard:hover { box-shadow: 0 0 0 1px var(--brand-10), 0 30px 80px -26px var(--brand-30); }
       .ocard .rule { position: absolute; left: 16px; right: 16px; top: 0; height: 1px; }
       .ocard-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
       .ocard-ico { width: 38px; height: 38px; border-radius: 11px; background: var(--brand-10); color: var(--brand); display: flex; align-items: center; justify-content: center; flex: none; }
@@ -92,30 +79,44 @@
       .ocard .sub { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-muted); }
       .ocard .lead-val { font-family: "Poppins"; font-size: 26px; font-weight: 600; line-height: 1; }
       .ocard .lead-lbl { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+      .ocard .mini { width: 100%; height: 22px; display: block; margin-top: 8px; }
       .ocard .open-hint { margin-top: 12px; font-size: 12px; color: var(--brand); opacity: 0; transition: opacity .25s; display: flex; align-items: center; gap: 6px; }
       .ocard:hover .open-hint { opacity: 1; }
-      .ocard .x { position: absolute; top: 10px; right: 10px; color: var(--text-muted); opacity: 0; transition: opacity .2s; }
-      .ocard:hover .x { opacity: .8; } .ocard .x:hover { color: var(--brand); }
-      .ocard .mini { width: 100%; height: 22px; display: block; margin-top: 8px; }
+      .ocard .ctl { position: absolute; top: 9px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); opacity: 0; transition: opacity .2s, color .2s; background: none; border: none; cursor: pointer; padding: 4px; }
+      .ocard:hover .ctl { opacity: .8; } .ocard .ctl:hover { color: var(--brand); opacity: 1; }
+      .ocard .ctl.star { left: 9px; } .ocard .ctl.x { right: 9px; }
+      .ocard .ctl.star.on { opacity: 1; color: var(--brand); }
+      .ocard .badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--brand); color: var(--bg); font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; display: none; }
+      .ocard.primary .badge { display: block; }
 
-      /* Detail (dashboard) view */
-      .detail { position: fixed; inset: 0; z-index: 40; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity .5s ease; background: linear-gradient(180deg, rgba(var(--brand-rgb),0.02), transparent 240px); }
+      .shot-core { fill: none; stroke: var(--brand); stroke-width: 2; stroke-linecap: round; filter: drop-shadow(0 0 6px var(--brand)); }
+      .shot-pulse { fill: var(--brand); filter: drop-shadow(0 0 5px var(--brand)); }
+      .chain-core { fill: none; stroke: var(--brand); stroke-opacity: .2; stroke-width: 1.5; }
+      .chain-links { fill: none; stroke: var(--brand); stroke-opacity: .6; stroke-width: 4; stroke-linecap: round; stroke-dasharray: .5 11; animation: dash 1.6s linear infinite; }
+      .chain-anchor { fill: var(--brand); }
+      .chain-pulse { fill: var(--brand); }
+
+      #bloom { position: fixed; left: 50%; top: 50%; width: 40px; height: 40px; border-radius: 50%; transform: translate(-50%,-50%) scale(1); background: radial-gradient(circle, var(--brand) 0%, transparent 68%); opacity: 0; pointer-events: none; z-index: 45; }
+      #bloom.go { animation: bloom .85s ease-out forwards; }
+
+      /* Detail */
+      .detail { position: fixed; inset: 0; z-index: 50; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity .5s ease; }
       body.in-dash .detail { opacity: 1; pointer-events: auto; }
-      body.in-dash .world { transform: scale(1.55); filter: saturate(110%); }
-      body.in-dash .orbit, body.in-dash .intro, body.in-dash .toolbar { opacity: 0; pointer-events: none; transition: opacity .35s; }
+      body.in-dash .world { transform: scale(2.4) !important; filter: blur(3px) brightness(1.08); }
+      body.in-dash .orbit, body.in-dash .intro, body.in-dash .toolbar, body.in-dash .summary { opacity: 0; pointer-events: none; }
+      .detail-bg { position: fixed; inset: 0; background: var(--bg); opacity: .86; z-index: -1; }
       .detail-inner { max-width: 1240px; margin: 0 auto; padding: 96px 24px 80px; }
-      .detail-bg { position: fixed; inset: 0; background: var(--bg); opacity: 0.82; z-index: -1; }
+      .detail.arriving .detail-inner { animation: arrive .85s cubic-bezier(.22,1,.36,1) both; }
       .dhead { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-bottom: 8px; }
       .dhead .globe-accent { width: 46px; height: 46px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, var(--brand), transparent 70%), var(--surface); border: 1px solid var(--border); box-shadow: 0 0 24px -6px var(--brand-30); flex: none; }
       .dhead h2 { font-size: clamp(24px,3.5vw,34px); font-weight: 600; margin: 0; }
       .dhead .dsub { color: var(--text-muted); font-size: 14px; margin-top: 2px; }
-      .pills { display: inline-flex; gap: 4px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 4px; margin-left: auto; }
+      .pills { display: inline-flex; gap: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 4px; margin-left: auto; }
       .pills button { border: none; background: none; cursor: pointer; color: var(--text-muted); border-radius: 999px; padding: 6px 14px; font-size: 13px; }
       .pills button.active { background: var(--brand); color: var(--bg); }
       .detail-desc { color: var(--text-muted); max-width: 640px; margin: 6px 0 28px; }
-
       .kgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 16px; }
-      .ktile { position: relative; border-radius: 16px; padding: 18px; background: var(--surface-2); border: 1px solid var(--border); backdrop-filter: blur(10px); box-shadow: 0 18px 50px -22px rgba(0,0,0,.4); animation: fadeUp .45s cubic-bezier(.22,1,.36,1) both; }
+      .ktile { position: relative; border-radius: 16px; padding: 18px; background: var(--surface); border: 1px solid var(--border); box-shadow: 0 18px 50px -22px rgba(0,0,0,.4); animation: fadeUp .45s cubic-bezier(.22,1,.36,1) both; }
       .ktile .klabel { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; }
       .ktile .kval { font-family: "Poppins"; font-size: 30px; font-weight: 600; line-height: 1.1; margin-top: 8px; }
       .ktile .kdelta { font-size: 12px; margin-top: 6px; font-weight: 500; }
@@ -125,100 +126,76 @@
       .ktile.add { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; cursor: pointer; border-style: dashed; color: var(--text-muted); background: transparent; min-height: 120px; transition: color .2s, border-color .2s; }
       .ktile.add:hover { color: var(--brand); border-color: var(--brand); }
 
-      /* Popovers / modals */
-      .pop { position: absolute; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%); width: 300px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 16px; padding: 14px; backdrop-filter: blur(10px); box-shadow: 0 18px 50px -20px rgba(0,0,0,.45); animation: fadeUp .35s cubic-bezier(.22,1,.36,1) both; }
+      .pop { position: absolute; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%); width: 300px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 14px; box-shadow: 0 18px 50px -20px rgba(0,0,0,.45); animation: fadeUp .35s cubic-bezier(.22,1,.36,1) both; }
       .pop[hidden] { display: none; }
       .pop label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .08em; }
       .pop input { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 14px; }
-      .pop .row { display: flex; gap: 8px; margin-top: 10px; }
-      .pop .row .btn { flex: 1; justify-content: center; }
+      .pop .row { display: flex; gap: 8px; margin-top: 10px; } .pop .row .btn { flex: 1; justify-content: center; }
 
-      .modal-wrap { position: fixed; inset: 0; z-index: 60; display: none; align-items: flex-start; justify-content: center; background: rgba(0,0,0,.4); backdrop-filter: blur(3px); padding: 80px 20px; overflow-y: auto; }
+      .modal-wrap { position: fixed; inset: 0; z-index: 70; display: none; align-items: flex-start; justify-content: center; background: rgba(0,0,0,.4); backdrop-filter: blur(3px); padding: 80px 20px; overflow-y: auto; }
       .modal-wrap.show { display: flex; }
       .modal { width: 100%; max-width: 640px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 24px; box-shadow: 0 30px 80px -30px rgba(0,0,0,.6); animation: fadeUp .4s cubic-bezier(.22,1,.36,1) both; }
       .modal h3 { margin: 0 0 4px; font-size: 20px; font-weight: 600; }
       .modal .msub { color: var(--text-muted); font-size: 14px; margin-bottom: 18px; }
       .group-title { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--brand); margin: 16px 0 8px; }
       .metric-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px,1fr)); gap: 8px; }
-      .metric-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; background: var(--surface-2); transition: border-color .2s, background .2s; }
+      .metric-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; background: var(--surface); transition: border-color .2s, background .2s; }
       .metric-item:hover { border-color: var(--brand); }
       .metric-item.added { background: var(--brand-10); border-color: var(--brand-30); }
       .metric-item .mi-check { width: 18px; height: 18px; border-radius: 6px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--brand); flex: none; }
       .metric-item.added .mi-check { background: var(--brand); color: var(--bg); border-color: var(--brand); }
       .metric-item .mi-name { font-size: 13px; line-height: 1.2; }
 
-      footer { display: none; }
       @keyframes pulse { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
       @keyframes fadeUp { 0% { opacity: 0; transform: translateY(14px) scale(.98); } 100% { opacity: 1; transform: none; } }
       @keyframes dash { to { stroke-dashoffset: -24; } }
-      .chain-core { fill: none; stroke: var(--brand); stroke-opacity: .2; stroke-width: 1.5; }
-      .chain-links { fill: none; stroke: var(--brand); stroke-opacity: .7; stroke-width: 4; stroke-linecap: round; stroke-dasharray: .5 11; animation: dash 1.6s linear infinite; }
-      .chain-anchor { fill: var(--brand); }
-      .chain-pulse { fill: var(--brand); }
-
+      @keyframes bloom { 0% { opacity: 0; transform: translate(-50%,-50%) scale(1); } 18% { opacity: .6; } 100% { opacity: 0; transform: translate(-50%,-50%) scale(55); } }
+      @keyframes arrive { 0% { opacity: 0; transform: translateY(34px) scale(1.06); filter: blur(9px); } 60% { opacity: 1; } 100% { opacity: 1; transform: none; filter: none; } }
       @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; } }
-      @media (max-width: 720px) { .ocard { width: 188px; padding: 13px; } .intro h1 { font-size: 26px; } }
+      @media (max-width: 720px) { .ocard { width: 184px; padding: 13px; } .intro h1 { font-size: 25px; } }
     </style>
   </head>
   <body>
     <header>
       <div class="bar">
         <a class="logo" href="#" id="logo-link">
-          <img id="logo-img" alt="Stannect"
-            src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/TQJOdU4270StImOTr6lM/media/64260d24-9ea1-4c9f-bc5c-80878076faa5.png"
-            onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='flex';" />
+          <img id="logo-img" alt="Stannect" src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/TQJOdU4270StImOTr6lM/media/64260d24-9ea1-4c9f-bc5c-80878076faa5.png" onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='flex';" />
           <span class="logo-fallback" id="logo-fallback">
             <span class="chip"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="9.5" width="9" height="5" rx="2.5"/><rect x="12" y="9.5" width="9" height="5" rx="2.5"/></svg></span>
             <span class="word">STANNECT</span>
           </span>
         </a>
-        <div class="head-actions">
-          <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme"></button>
-        </div>
+        <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme"></button>
       </div>
     </header>
 
     <div class="scene" id="scene">
       <div class="world" id="world"><canvas></canvas></div>
       <div class="world-hot" id="world-hot" aria-hidden="true"></div>
-
-      <div class="summary" id="summary"><div class="box"><div class="big" id="sum-big">4 connected dashboards</div><div class="sm" id="sum-sm">1,204 contacts · 87 estimates won · $182k closed</div></div></div>
-
+      <div class="summary" id="summary"><div class="box"><div class="big" id="sum-big"></div><div class="sm" id="sum-sm"></div></div></div>
       <div class="intro" id="intro">
         <span class="pill"><span class="dot"></span> Stannect Command Center</span>
         <h1>Where your business meets <span class="accent">automation</span></h1>
-        <p>Hover the world to see the big picture — click any dashboard to dive into its KPIs.</p>
+        <p>Move around the world to explore your dashboards — click one to step inside its KPIs.</p>
       </div>
-
-      <div class="orbit" id="orbit">
-        <svg id="chains" aria-hidden="true"></svg>
-      </div>
-
+      <div class="orbit" id="orbit"><svg id="chains" aria-hidden="true"></svg></div>
+      <svg id="fx" aria-hidden="true"><path id="shot-path" class="shot-core" d=""></path></svg>
       <div class="toolbar" id="toolbar">
         <div style="position:relative">
-          <button class="btn" id="add-btn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-            Add dashboard
-          </button>
+          <button class="btn" id="add-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg> Add dashboard</button>
           <div class="pop" id="add-pop" hidden>
             <label for="dash-name">Name your dashboard</label>
             <input id="dash-name" type="text" placeholder="e.g. Dashboard Sarah" autocomplete="off" />
-            <div class="row">
-              <button class="btn btn-ghost" id="add-cancel">Cancel</button>
-              <button class="btn" id="add-create">Create</button>
-            </div>
+            <div class="row"><button class="btn btn-ghost" id="add-cancel">Cancel</button><button class="btn" id="add-create">Create</button></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Dashboard detail -->
-    <div class="detail" id="detail">
-      <div class="detail-bg"></div>
-      <div class="detail-inner" id="detail-inner"></div>
-    </div>
+    <div id="bloom"></div>
 
-    <!-- Metric picker -->
+    <div class="detail" id="detail"><div class="detail-bg"></div><div class="detail-inner" id="detail-inner"></div></div>
+
     <div class="modal-wrap" id="metric-modal">
       <div class="modal">
         <h3>Connect a metric</h3>
@@ -228,105 +205,99 @@
       </div>
     </div>
 
-    <footer></footer>
-
     <script>
       (function () {
         "use strict";
-        var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         var html = document.documentElement;
 
-        /* ---------- Theme ---------- */
+        /* Theme */
         var sun = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>';
         var moon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8z"/></svg>';
-        try { var s = localStorage.getItem("stannect-theme"); if (s) html.setAttribute("data-theme", s); } catch (e) {}
+        try { var sv = localStorage.getItem("stannect-theme"); if (sv) html.setAttribute("data-theme", sv); } catch (e) {}
         var toggle = document.getElementById("theme-toggle");
         function paint() { toggle.innerHTML = html.getAttribute("data-theme") === "dark" ? sun : moon; }
         paint();
-        toggle.addEventListener("click", function () {
-          var n = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
-          html.setAttribute("data-theme", n); try { localStorage.setItem("stannect-theme", n); } catch (e) {} paint();
-        });
+        toggle.addEventListener("click", function () { var n = html.getAttribute("data-theme") === "dark" ? "light" : "dark"; html.setAttribute("data-theme", n); try { localStorage.setItem("stannect-theme", n); } catch (e) {} paint(); });
 
         var icons = {
           dashboard: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>',
           integration: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 6H15.5M6 8.5V15a3 3 0 0 0 3 3h6.5"/></svg>',
-          star: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.8L6.6 19.6l1-6L3.3 9.4l6-.9z"/></svg>',
-          close: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+          star: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3l2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.8L6.6 19.6l1-6L3.3 9.4l6-.9z"/></svg>',
+          starOn: '<svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3l2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.8L6.6 19.6l1-6L3.3 9.4l6-.9z"/></svg>',
+          close: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
           check: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>',
           arrow: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
           back: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>'
         };
         function accentVar(n) { return n === 2 ? "var(--accent-2)" : n === 3 ? "var(--accent-3)" : "var(--accent-1)"; }
 
-        /* ---------- KPI catalog (from the Stannect KPI research) ---------- */
-        // good=true means the delta is a positive thing (colored bronze), false = muted.
+        /* KPI catalog (from Stannect KPI research) */
         var CAT = {
-          contacts:        { label: "Contacts",                 val: "1,204",  delta: "+46",     up: true,  good: true,  spark: [60,72,68,80,86,90,98,110] },
-          estimatesSent:   { label: "Estimates Sent",           val: "318",    delta: "+12",     up: true,  good: true,  spark: [18,22,20,26,28,30,34,38] },
-          estimatesWon:    { label: "Estimates Won",            val: "87",     delta: "+5",      up: true,  good: true,  spark: [6,8,7,10,11,12,14,16] },
-          totalLeads:      { label: "Total New Leads",          val: "1,540",  delta: "+8.1%",   up: true,  good: true,  spark: [80,92,88,104,112,108,124,140] },
-          speedToLead:     { label: "Speed to Lead (median)",   val: "4m 12s", delta: "−38s",    up: false, good: true },
-          contactRate:     { label: "Contact Rate",             val: "68%",    delta: "+3.2%",   up: true,  good: true },
-          missedCallRate:  { label: "Missed Call Rate",         val: "6.4%",   delta: "−1.1%",   up: false, good: true },
-          missedRecovery:  { label: "Missed Call Recovery",     val: "82%",    delta: "+5%",     up: true,  good: true },
-          leadToAppt:      { label: "Lead → Appointment",       val: "31%",    delta: "+2.4%",   up: true,  good: true },
-          showRate:        { label: "Appointment Show Rate",    val: "92%",    delta: "+4%",     up: true,  good: true },
-          sameDayAppt:     { label: "Same-Day Appt Rate",       val: "41%",    delta: "+6%",     up: true,  good: true },
-          apptCancel:      { label: "Appt Cancellation Rate",   val: "7%",     delta: "−2%",     up: false, good: true },
-          closeRate:       { label: "Close Rate",               val: "38%",    delta: "+3.1%",   up: true,  good: true },
-          leadToSale:      { label: "Lead → Sale",              val: "12%",    delta: "+1.2%",   up: true,  good: true },
-          avgDeal:         { label: "Average Deal Size",        val: "$11,800",delta: "+4.6%",   up: true,  good: true },
-          revPerLead:      { label: "Revenue per Lead",         val: "$312",   delta: "+9%",     up: true,  good: true,  spark: [180,200,210,230,250,260,290,312] },
-          closedRevenue:   { label: "Closed Revenue",           val: "$182k",  delta: "+12.4%",  up: true,  good: true,  spark: [120,130,128,150,160,158,172,182] },
-          pipelineValue:   { label: "Pipeline Value",           val: "$1.2M",  delta: "+6%",     up: true,  good: true },
-          pipelineAging:   { label: "Pipeline Aging (median)",  val: "9 days", delta: "−1 day",  up: false, good: true },
-          stalledOpps:     { label: "Stalled Opportunity Rate", val: "14%",    delta: "−3%",     up: false, good: true },
-          reactivatedLeads:{ label: "Reactivated Leads",        val: "96",     delta: "+18",     up: true,  good: true },
-          reactivationConv:{ label: "Reactivation Conversion",  val: "23%",    delta: "+4%",     up: true,  good: true },
-          reactivationRev: { label: "Reactivation Revenue",     val: "$41k",   delta: "+$9k",    up: true,  good: true },
-          costReactAppt:   { label: "Cost / Reactivated Appt",  val: "$38",    delta: "−$6",     up: false, good: true },
-          cpl:             { label: "Cost per Lead",            val: "$42",    delta: "−$4",     up: false, good: true },
-          costPerAppt:     { label: "Cost per Booked Appt",     val: "$135",   delta: "−$12",    up: false, good: true },
-          costPerSale:     { label: "Cost per Sale",            val: "$355",   delta: "−$22",    up: false, good: true },
-          cpa:             { label: "Cost per Acquisition",     val: "$355",   delta: "−6%",     up: false, good: true },
-          sourceRevenue:   { label: "Top Source Revenue",       val: "LinkedIn",delta: "$74k",   up: true,  good: true },
-          followUp:        { label: "Follow-Up Compliance",     val: "94%",    delta: "+2%",     up: true,  good: true },
-          timeToEstimate:  { label: "Time to Estimate",         val: "1.4 days",delta: "−0.3",   up: false, good: true },
-          proposalAccept:  { label: "Proposal Acceptance Time", val: "2.1 days",delta: "−0.4",   up: false, good: true },
-          dataComplete:    { label: "Data Completeness",        val: "97%",    delta: "+1%",     up: true,  good: true },
-          autoFailure:     { label: "Automation Failure Rate",  val: "0.4%",   delta: "−0.1%",   up: false, good: true },
-          activityPerLead: { label: "Activity per Lead",        val: "7.3",    delta: "+0.5",    up: true,  good: true },
-          touchToConv:     { label: "Touchpoints to Conv.",     val: "3.2",    delta: "−0.4",    up: false, good: true },
-          touchToClose:    { label: "Touchpoints to Close",     val: "11.5",   delta: "−0.8",    up: false, good: true }
+          contacts:{label:"Contacts",val:"1,204",delta:"+46",up:true,good:true,spark:[60,72,68,80,86,90,98,110]},
+          estimatesSent:{label:"Estimates Sent",val:"318",delta:"+12",up:true,good:true,spark:[18,22,20,26,28,30,34,38]},
+          estimatesWon:{label:"Estimates Won",val:"87",delta:"+5",up:true,good:true,spark:[6,8,7,10,11,12,14,16]},
+          totalLeads:{label:"Total New Leads",val:"1,540",delta:"+8.1%",up:true,good:true,spark:[80,92,88,104,112,108,124,140]},
+          speedToLead:{label:"Speed to Lead (median)",val:"4m 12s",delta:"−38s",up:false,good:true},
+          contactRate:{label:"Contact Rate",val:"68%",delta:"+3.2%",up:true,good:true},
+          missedCallRate:{label:"Missed Call Rate",val:"6.4%",delta:"−1.1%",up:false,good:true},
+          missedRecovery:{label:"Missed Call Recovery",val:"82%",delta:"+5%",up:true,good:true},
+          leadToAppt:{label:"Lead → Appointment",val:"31%",delta:"+2.4%",up:true,good:true},
+          showRate:{label:"Appointment Show Rate",val:"92%",delta:"+4%",up:true,good:true},
+          sameDayAppt:{label:"Same-Day Appt Rate",val:"41%",delta:"+6%",up:true,good:true},
+          apptCancel:{label:"Appt Cancellation Rate",val:"7%",delta:"−2%",up:false,good:true},
+          closeRate:{label:"Close Rate",val:"38%",delta:"+3.1%",up:true,good:true},
+          leadToSale:{label:"Lead → Sale",val:"12%",delta:"+1.2%",up:true,good:true},
+          avgDeal:{label:"Average Deal Size",val:"$11,800",delta:"+4.6%",up:true,good:true},
+          revPerLead:{label:"Revenue per Lead",val:"$312",delta:"+9%",up:true,good:true,spark:[180,200,210,230,250,260,290,312]},
+          closedRevenue:{label:"Closed Revenue",val:"$182k",delta:"+12.4%",up:true,good:true,spark:[120,130,128,150,160,158,172,182]},
+          pipelineValue:{label:"Pipeline Value",val:"$1.2M",delta:"+6%",up:true,good:true},
+          pipelineAging:{label:"Pipeline Aging (median)",val:"9 days",delta:"−1 day",up:false,good:true},
+          stalledOpps:{label:"Stalled Opportunity Rate",val:"14%",delta:"−3%",up:false,good:true},
+          reactivatedLeads:{label:"Reactivated Leads",val:"96",delta:"+18",up:true,good:true},
+          reactivationConv:{label:"Reactivation Conversion",val:"23%",delta:"+4%",up:true,good:true},
+          reactivationRev:{label:"Reactivation Revenue",val:"$41k",delta:"+$9k",up:true,good:true},
+          costReactAppt:{label:"Cost / Reactivated Appt",val:"$38",delta:"−$6",up:false,good:true},
+          cpl:{label:"Cost per Lead",val:"$42",delta:"−$4",up:false,good:true},
+          costPerAppt:{label:"Cost per Booked Appt",val:"$135",delta:"−$12",up:false,good:true},
+          costPerSale:{label:"Cost per Sale",val:"$355",delta:"−$22",up:false,good:true},
+          cpa:{label:"Cost per Acquisition",val:"$355",delta:"−6%",up:false,good:true},
+          sourceRevenue:{label:"Top Source Revenue",val:"LinkedIn",delta:"$74k",up:true,good:true},
+          followUp:{label:"Follow-Up Compliance",val:"94%",delta:"+2%",up:true,good:true},
+          timeToEstimate:{label:"Time to Estimate",val:"1.4 days",delta:"−0.3",up:false,good:true},
+          proposalAccept:{label:"Proposal Acceptance Time",val:"2.1 days",delta:"−0.4",up:false,good:true},
+          dataComplete:{label:"Data Completeness",val:"97%",delta:"+1%",up:true,good:true},
+          autoFailure:{label:"Automation Failure Rate",val:"0.4%",delta:"−0.1%",up:false,good:true},
+          activityPerLead:{label:"Activity per Lead",val:"7.3",delta:"+0.5",up:true,good:true},
+          touchToConv:{label:"Touchpoints to Conv.",val:"3.2",delta:"−0.4",up:false,good:true},
+          touchToClose:{label:"Touchpoints to Close",val:"11.5",delta:"−0.8",up:false,good:true}
         };
         var GROUPS = [
-          { name: "Estimates & Volume", keys: ["contacts","estimatesSent","estimatesWon","totalLeads"] },
-          { name: "Lead Flow & Speed",  keys: ["speedToLead","contactRate","missedCallRate","missedRecovery"] },
-          { name: "Appointments",       keys: ["leadToAppt","showRate","sameDayAppt","apptCancel"] },
-          { name: "Sales Conversion",   keys: ["closeRate","leadToSale","avgDeal","revPerLead","closedRevenue"] },
-          { name: "Pipeline Health",    keys: ["pipelineValue","pipelineAging","stalledOpps"] },
-          { name: "Rehash & Follow-up", keys: ["reactivatedLeads","reactivationConv","reactivationRev","costReactAppt"] },
-          { name: "Marketing & Cost",   keys: ["cpl","costPerAppt","costPerSale","cpa","sourceRevenue"] },
-          { name: "Experience",         keys: ["followUp","timeToEstimate","proposalAccept"] },
-          { name: "Touchpoints",        keys: ["touchToConv","touchToClose"] },
-          { name: "System Health",      keys: ["dataComplete","autoFailure","activityPerLead"] }
+          {name:"Estimates & Volume",keys:["contacts","estimatesSent","estimatesWon","totalLeads"]},
+          {name:"Lead Flow & Speed",keys:["speedToLead","contactRate","missedCallRate","missedRecovery"]},
+          {name:"Appointments",keys:["leadToAppt","showRate","sameDayAppt","apptCancel"]},
+          {name:"Sales Conversion",keys:["closeRate","leadToSale","avgDeal","revPerLead","closedRevenue"]},
+          {name:"Pipeline Health",keys:["pipelineValue","pipelineAging","stalledOpps"]},
+          {name:"Rehash & Follow-up",keys:["reactivatedLeads","reactivationConv","reactivationRev","costReactAppt"]},
+          {name:"Marketing & Cost",keys:["cpl","costPerAppt","costPerSale","cpa","sourceRevenue"]},
+          {name:"Experience",keys:["followUp","timeToEstimate","proposalAccept"]},
+          {name:"Touchpoints",keys:["touchToConv","touchToClose"]},
+          {name:"System Health",keys:["dataComplete","autoFailure","activityPerLead"]}
         ];
-
         var EXEC = ["contacts","estimatesSent","estimatesWon","totalLeads","speedToLead","leadToAppt","showRate","closeRate","revPerLead","closedRevenue","cpa","touchToClose"];
         var JOBTREAD = ["contacts","estimatesSent","estimatesWon","avgDeal","closedRevenue","timeToEstimate","proposalAccept","sourceRevenue"];
 
-        /* ---------- State ---------- */
         var uid = 0; function nid() { uid++; return "d-" + Date.now().toString(36) + "-" + uid; }
         var dashboards = [
-          { id: "d-main",  name: "Dashboard Main",     sub: "Company-wide · Roofing", kind: "dashboard",  accent: 1, kpis: EXEC.slice() },
-          { id: "d-kyle",  name: "Dashboard Kyle",     sub: "Owner: Kyle · Roofing",  kind: "dashboard",  accent: 2, kpis: EXEC.slice() },
-          { id: "d-rhyne", name: "Dashboard Rhyne",    sub: "Owner: Rhyne · Exteriors",kind: "dashboard", accent: 3, kpis: EXEC.slice() },
-          { id: "d-jt",    name: "Dashboard JobTread", sub: "Integration · Estimates",kind: "integration",accent: 2, kpis: JOBTREAD.slice() }
+          {id:"d-main",name:"Dashboard Main",sub:"Company-wide · Roofing",kind:"dashboard",accent:1,kpis:EXEC.slice()},
+          {id:"d-kyle",name:"Dashboard Kyle",sub:"Owner: Kyle · Roofing",kind:"dashboard",accent:2,kpis:EXEC.slice()},
+          {id:"d-rhyne",name:"Dashboard Rhyne",sub:"Owner: Rhyne · Exteriors",kind:"dashboard",accent:3,kpis:EXEC.slice()},
+          {id:"d-jt",name:"Dashboard JobTread",sub:"Integration · Estimates",kind:"integration",accent:2,kpis:JOBTREAD.slice()}
         ];
+        var primaryId = "d-main";
         var activeId = null;
 
-        /* ---------- Sparkline ---------- */
+        function rnd(i, s) { var x = Math.sin(i * 127.1 + s * 311.7) * 43758.5453; return x - Math.floor(x); }
         function spark(data, h) {
           h = h || 26; var w = 100, mn = Math.min.apply(null, data), mx = Math.max.apply(null, data), sp = (mx - mn) || 1, st = w / (data.length - 1), pts = [];
           for (var i = 0; i < data.length; i++) pts.push([i * st, h - ((data[i] - mn) / sp) * h]);
@@ -334,21 +305,29 @@
           return '<svg class="mini" viewBox="0 0 100 ' + h + '" preserveAspectRatio="none"><path d="' + line + ' L100 ' + h + ' L0 ' + h + ' Z" fill="var(--brand-10)"></path><path d="' + line + '" fill="none" stroke="var(--brand)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path></svg>';
         }
 
-        /* ---------- Orbit view ---------- */
         var scene = document.getElementById("scene");
         var orbit = document.getElementById("orbit");
         var chains = document.getElementById("chains");
+        var fx = document.getElementById("fx");
+        var shotPath = document.getElementById("shot-path");
+        var world = document.getElementById("world");
         var worldHot = document.getElementById("world-hot");
+        var summary = document.getElementById("summary");
+        var bloom = document.getElementById("bloom");
+
+        var nodes = []; // {d, el, hf, core, links, anchor}
 
         function ocardHtml(d) {
           var lead = CAT[d.kpis.indexOf("closedRevenue") >= 0 ? "closedRevenue" : d.kpis[0]];
-          var ic = d.kind === "integration" ? icons.integration : (d.id === "d-main" ? icons.star : icons.dashboard);
+          var ic = d.kind === "integration" ? icons.integration : icons.dashboard;
+          var isP = d.id === primaryId;
           return (
-            '<div class="ocard" data-id="' + d.id + '" style="left:0;top:0">' +
+            '<div class="ocard' + (isP ? " primary" : "") + '" data-id="' + d.id + '">' +
+              '<span class="badge">Primary</span>' +
               '<span class="rule" style="background:' + accentVar(d.accent) + '"></span>' +
-              '<button class="x" data-del="' + d.id + '" aria-label="Remove">' + icons.close + '</button>' +
-              '<div class="ocard-head"><span class="ocard-ico">' + ic + '</span>' +
-                '<div><h3>' + d.name + '</h3><div class="sub">' + d.sub + '</div></div></div>' +
+              '<button class="ctl star' + (isP ? " on" : "") + '" data-star="' + d.id + '" title="Set as primary">' + (isP ? icons.starOn : icons.star) + '</button>' +
+              '<button class="ctl x" data-del="' + d.id + '" title="Remove">' + icons.close + '</button>' +
+              '<div class="ocard-head"><span class="ocard-ico">' + ic + '</span><div><h3>' + d.name + '</h3><div class="sub">' + d.sub + '</div></div></div>' +
               '<div class="lead-val">' + lead.val + '</div><div class="lead-lbl">' + lead.label + '</div>' +
               (lead.spark ? spark(lead.spark, 22) : '') +
               '<div class="open-hint">Open dashboard ' + icons.arrow + '</div>' +
@@ -356,241 +335,203 @@
           );
         }
 
+        function order() {
+          // primary first, rest in stable order
+          var p = dashboards.filter(function (d) { return d.id === primaryId; });
+          var rest = dashboards.filter(function (d) { return d.id !== primaryId; });
+          return p.concat(rest);
+        }
+
         function renderOrbit() {
-          // remove old cards (keep the svg)
           orbit.querySelectorAll(".ocard").forEach(function (n) { n.remove(); });
-          dashboards.forEach(function (d) { orbit.insertAdjacentHTML("beforeend", ocardHtml(d)); });
-          orbit.querySelectorAll(".ocard").forEach(function (el) {
-            el.addEventListener("click", function () { openDash(el.getAttribute("data-id")); });
+          nodes = [];
+          var od = order();
+          var chainSvg = "";
+          od.forEach(function (d, i) { chainSvg += '<path id="cp' + i + '" class="chain-core" d=""></path><path class="chain-links" data-i="' + i + '" d=""></path><circle class="chain-anchor" data-i="' + i + '" r="4"></circle><circle class="chain-pulse" r="2.3"><animateMotion dur="3s" repeatCount="indefinite"><mpath href="#cp' + i + '"></mpath></animateMotion></circle>'; });
+          chains.innerHTML = chainSvg;
+          od.forEach(function (d, i) {
+            orbit.insertAdjacentHTML("beforeend", ocardHtml(d));
+            var el = orbit.lastElementChild;
+            var nd = { d: d, el: el, hf: 1, isP: d.id === primaryId, i: i,
+              core: chains.querySelector("#cp" + i), links: chains.querySelector('.chain-links[data-i="' + i + '"]'), anchor: chains.querySelector('.chain-anchor[data-i="' + i + '"]') };
+            // deterministic scattered layout
+            if (nd.isP) { nd.ang = Math.PI * 0.5; nd.radF = 0.46; nd.depth = 1.28; nd.ph = 0; }
+            else { nd.ang = -Math.PI / 2 + (i * 2.39996); nd.radF = 0.72 + rnd(i, 1) * 0.5; nd.depth = 0.58 + rnd(i, 2) * 0.6; nd.ph = rnd(i, 3) * 6.28; }
+            el.style.zIndex = String(3 + Math.round(nd.depth * 100));
+            el.addEventListener("click", function () { if (!busy) selectDash(d.id); });
+            el.addEventListener("pointerenter", function () { nd.hover = true; });
+            el.addEventListener("pointerleave", function () { nd.hover = false; });
+            el.querySelector("[data-star]").addEventListener("click", function (e) { e.stopPropagation(); primaryId = d.id; renderOrbit(); });
+            el.querySelector("[data-del]").addEventListener("click", function (e) { e.stopPropagation(); dashboards = dashboards.filter(function (x) { return x.id !== d.id; }); if (primaryId === d.id && dashboards[0]) primaryId = dashboards[0].id; renderOrbit(); });
+            nodes.push(nd);
           });
-          orbit.querySelectorAll("[data-del]").forEach(function (b) {
-            b.addEventListener("click", function (e) {
-              e.stopPropagation();
-              dashboards = dashboards.filter(function (x) { return x.id !== b.getAttribute("data-del"); });
-              renderOrbit();
-            });
-          });
-          layoutOrbit();
         }
 
-        function layoutOrbit() {
-          var W = scene.clientWidth, H = scene.clientHeight;
-          var cx = W / 2, cy = H * 0.54;
-          var minD = Math.min(W, H);
-          var cards = orbit.querySelectorAll(".ocard");
-          var n = cards.length;
-          var ringR = Math.max(150, Math.min(minD * 0.40, cx - 130, cy - 110));
-          var anchorR = minD * 0.205;
-          var start = -Math.PI / 4; // diagonals, keeps top/bottom clear
-          var svg = "";
-          cards.forEach(function (el, i) {
-            var ang = start + (i * (Math.PI * 2)) / n;
-            var px = cx + Math.cos(ang) * ringR;
-            var py = cy + Math.sin(ang) * ringR;
-            el.style.left = (px - el.offsetWidth / 2) + "px";
-            el.style.top = (py - el.offsetHeight / 2) + "px";
-            var ax = cx + Math.cos(ang) * anchorR, ay = cy + Math.sin(ang) * anchorR;
-            // chain meets the near edge of the card
-            var dx = px - ax, dy = py - ay, len = Math.hypot(dx, dy) || 1;
-            var ex = px - (dx / len) * (el.offsetHeight / 2 + 6), ey = py - (dy / len) * (el.offsetHeight / 2 + 6);
-            var mx = (ax + ex) / 2, my = (ay + ey) / 2;
-            var dd = "M" + ax + " " + ay + " Q" + mx + " " + my + " " + ex + " " + ey;
-            var pid = "cp" + i;
-            svg += '<path id="' + pid + '" d="' + dd + '" fill="none" stroke="none"></path>' +
-                   '<path class="chain-core" d="' + dd + '"></path>' +
-                   '<path class="chain-links" d="' + dd + '"></path>' +
-                   '<circle class="chain-anchor" cx="' + ax.toFixed(1) + '" cy="' + ay.toFixed(1) + '" r="4"></circle>' +
-                   '<circle class="chain-pulse" r="2.4"><animateMotion dur="3s" repeatCount="indefinite"><mpath href="#' + pid + '"></mpath></animateMotion></circle>';
-          });
-          chains.setAttribute("width", W); chains.setAttribute("height", H);
-          chains.innerHTML = svg;
-          // size the globe hover hotspot to the ball
-          var d = anchorR * 2.1;
-          worldHot.style.width = d + "px"; worldHot.style.height = d + "px";
-          worldHot.style.top = (cy / H * 100) + "%";
+        /* layout + animation loop */
+        var pT = { x: 0, y: 0 }, eT = { x: 0, y: 0 };
+        if (!reduce) window.addEventListener("pointermove", function (e) { pT.x = (e.clientX / window.innerWidth - 0.5) * 2; pT.y = (e.clientY / window.innerHeight - 0.5) * 2; }, { passive: true });
+
+        var W = 0, H = 0, DPR = 1, ballX = 0, ballY = 0, ballR = 0;
+        var canvas = document.querySelector("#world canvas"), ctx = canvas.getContext("2d");
+        function resize() {
+          var rect = scene.getBoundingClientRect(); DPR = Math.min(window.devicePixelRatio || 1, 2);
+          W = rect.width; H = rect.height; canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR); ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+          var d = Math.min(W, H) * 0.42; worldHot.style.width = d + "px"; worldHot.style.height = d + "px";
+        }
+        resize();
+        if (window.ResizeObserver) new ResizeObserver(resize).observe(scene);
+        window.addEventListener("resize", resize);
+
+        // globe geometry
+        var N = 540, golden = Math.PI * (3 - Math.sqrt(5)), pts = [];
+        for (var gi = 0; gi < N; gi++) { var gy = 1 - (gi / (N - 1)) * 2, gr = Math.sqrt(1 - gy * gy), gt = golden * gi; pts.push({ x: Math.cos(gt) * gr, y: gy, z: Math.sin(gt) * gr, ph: Math.random() * 6.28 }); }
+        var edges = [], seen = {};
+        for (var ai = 0; ai < N; ai++) { var dd = []; for (var bi = 0; bi < N; bi++) { if (ai === bi) continue; var ex = pts[ai].x - pts[bi].x, ey = pts[ai].y - pts[bi].y, ez = pts[ai].z - pts[bi].z; dd.push({ j: bi, d: ex*ex+ey*ey+ez*ez }); } dd.sort(function (m, n) { return m.d - n.d; }); for (var kk = 0; kk < 3; kk++) { var jj = dd[kk].j, key = ai < jj ? ai+"-"+jj : jj+"-"+ai; if (!seen[key]) { seen[key] = 1; edges.push([ai, jj]); } } }
+        var brand = "184,149,103";
+        function readBrand() { var v = getComputedStyle(html).getPropertyValue("--brand-rgb").trim(); if (v) brand = v; }
+        readBrand(); new MutationObserver(readBrand).observe(html, { attributes: true, attributeFilter: ["data-theme"] });
+        var angle = 0, proj = pts.map(function () { return { x: 0, y: 0, z: 0 }; });
+
+        function tick() {
+          var locked = document.body.classList.contains("in-dash");
+          var tx = locked ? 0 : pT.x, ty = locked ? 0 : pT.y;
+          eT.x += (tx - eT.x) * 0.045; eT.y += (ty - eT.y) * 0.045;
+          var t = performance.now() * 0.001;
+
+          // ball center (parallax depth ~0.9)
+          var cx = W / 2, cy = H * 0.5;
+          ballR = Math.min(W, H) * 0.2;
+          ballX = cx + eT.x * 22 * 0.9; ballY = cy + eT.y * 16 * 0.9;
+
+          // globe draw
+          if (!reduce) angle += 0.0015;
+          var tilt = -0.32 + (locked ? 0 : eT.y * 0.16), ay = angle + (locked ? 0 : eT.x * 0.22);
+          var cA = Math.cos(ay), sA = Math.sin(ay), cT = Math.cos(tilt), sT = Math.sin(tilt);
+          for (var i = 0; i < N; i++) { var p = pts[i], xz = p.x * cA + p.z * sA, zz = -p.x * sA + p.z * cA; var yy = p.y * cT - zz * sT, zt = p.y * sT + zz * cT; proj[i].x = ballX + xz * ballR; proj[i].y = ballY + yy * ballR; proj[i].z = zt; }
+          ctx.clearRect(0, 0, W, H); ctx.lineWidth = 1;
+          for (var e = 0; e < edges.length; e++) { var pa = proj[edges[e][0]], pb = proj[edges[e][1]], dep = (pa.z + pb.z) / 2; if (dep < -0.55) continue; var al = Math.max(0, (dep + 0.6) / 1.6) * 0.34; ctx.strokeStyle = "rgba(" + brand + "," + al.toFixed(3) + ")"; ctx.beginPath(); ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y); ctx.stroke(); }
+          for (var nnn = 0; nnn < N; nnn++) { var pp = proj[nnn], fr = (pp.z + 1) / 2; var tw = reduce ? 1 : 0.7 + 0.3 * Math.sin(t * 1.4 + pts[nnn].ph); ctx.beginPath(); ctx.fillStyle = "rgba(" + brand + "," + ((0.12 + fr * 0.85) * tw).toFixed(3) + ")"; ctx.arc(pp.x, pp.y, 0.5 + fr * 1.7, 0, 6.2832); ctx.fill(); }
+
+          // cards + chains
+          var ringR = Math.min(W, H) * 0.42;
+          for (var c = 0; c < nodes.length; c++) {
+            var nd = nodes[c], el = nd.el;
+            var rad = ringR * nd.radF;
+            var wx = cx + Math.cos(nd.ang) * rad;
+            var wy = cy + Math.sin(nd.ang) * rad;
+            var fx2 = reduce ? 0 : Math.sin(t * 0.5 + nd.ph) * 7 * nd.depth;
+            var fy2 = reduce ? 0 : Math.cos(t * 0.42 + nd.ph * 1.3) * 7 * nd.depth;
+            var par = locked ? 0 : 1;
+            var sx = wx + fx2 + eT.x * 34 * nd.depth * par;
+            var sy = wy + fy2 + eT.y * 26 * nd.depth * par;
+            // ease hover factor
+            var tgt = nd.hover ? 1.12 : 1; nd.hf += (tgt - nd.hf) * 0.12;
+            var sc = nd.depth * nd.hf;
+            el.style.left = sx + "px"; el.style.top = sy + "px";
+            el.style.transform = "translate(-50%,-50%) scale(" + sc.toFixed(3) + ")";
+            var blurAmt = Math.max(0, (1 - nd.depth)) * 3.2;
+            el.style.filter = (nd.hover ? "" : (blurAmt > 0.2 ? "blur(" + blurAmt.toFixed(2) + "px) " : "")) + "brightness(" + (0.82 + nd.depth * 0.2).toFixed(3) + ")";
+            // chain: ball edge -> card near edge
+            var dx = sx - ballX, dy = sy - ballY, len = Math.hypot(dx, dy) || 1, ux = dx / len, uy = dy / len;
+            var ax = ballX + ux * ballR, ayy = ballY + uy * ballR;
+            var halfH = (el.offsetHeight * sc) / 2 + 6;
+            var exx = sx - ux * halfH, eyy = sy - uy * halfH;
+            var mx = (ax + exx) / 2 + (-uy) * 14, my = (ayy + eyy) / 2 + ux * 14;
+            var dpath = "M" + ax.toFixed(1) + " " + ayy.toFixed(1) + " Q" + mx.toFixed(1) + " " + my.toFixed(1) + " " + exx.toFixed(1) + " " + eyy.toFixed(1);
+            nd.core.setAttribute("d", dpath); nd.links.setAttribute("d", dpath);
+            nd.anchor.setAttribute("cx", ax.toFixed(1)); nd.anchor.setAttribute("cy", ayy.toFixed(1));
+            var depthOpacity = locked ? 0 : (0.45 + nd.depth * 0.4);
+            nd.core.setAttribute("stroke-opacity", (depthOpacity * 0.5).toFixed(2));
+            nd.links.setAttribute("stroke-opacity", depthOpacity.toFixed(2));
+          }
+          requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+
+        /* hover summary */
+        worldHot.addEventListener("pointerenter", function () { if (!document.body.classList.contains("in-dash")) { summary.classList.add("show"); world.classList.add("hover"); } });
+        worldHot.addEventListener("pointerleave", function () { summary.classList.remove("show"); world.classList.remove("hover"); });
+
+        /* selection: shoot chain -> bloom -> warp into dashboard */
+        var busy = false;
+        function selectDash(id) {
+          var nd = null; for (var c = 0; c < nodes.length; c++) if (nodes[c].d.id === id) nd = nodes[c];
+          if (!nd) { openDash(id); return; }
+          busy = true;
+          var rect = nd.el.getBoundingClientRect(), srect = scene.getBoundingClientRect();
+          var tx = rect.left + rect.width / 2 - srect.left, ty = rect.top + rect.height / 2 - srect.top;
+          var d = "M" + ballX.toFixed(1) + " " + ballY.toFixed(1) + " L" + tx.toFixed(1) + " " + ty.toFixed(1);
+          shotPath.setAttribute("d", d);
+          var len = 0; try { len = shotPath.getTotalLength(); } catch (e) { len = Math.hypot(tx - ballX, ty - ballY); }
+          shotPath.style.transition = "none"; shotPath.style.strokeDasharray = len; shotPath.style.strokeDashoffset = len; shotPath.style.opacity = "1";
+          // force reflow then draw in
+          void shotPath.getBoundingClientRect();
+          shotPath.style.transition = "stroke-dashoffset .42s cubic-bezier(.6,0,.2,1)";
+          shotPath.style.strokeDashoffset = "0";
+          setTimeout(function () {
+            // bloom from ball
+            bloom.style.left = (srect.left + ballX) + "px"; bloom.style.top = (srect.top + ballY) + "px";
+            bloom.classList.remove("go"); void bloom.offsetWidth; bloom.classList.add("go");
+            openDash(id);
+            shotPath.style.transition = "opacity .3s"; shotPath.style.opacity = "0";
+            busy = false;
+          }, 430);
         }
 
-        /* ---------- Dashboard detail ---------- */
+        /* detail */
         function ktileHtml(key) {
           var k = CAT[key]; if (!k) return "";
           var arrow = k.up === true ? "▲" : k.up === false ? "▼" : "";
           var color = k.good ? "var(--brand)" : "var(--text-muted)";
-          return (
-            '<div class="ktile">' +
-              '<button class="kx" data-rmk="' + key + '" aria-label="Remove metric">' + icons.close + '</button>' +
-              '<div class="klabel">' + k.label + '</div>' +
-              '<div class="kval">' + k.val + '</div>' +
-              (k.delta ? '<div class="kdelta" style="color:' + color + '">' + arrow + ' ' + k.delta + '</div>' : '') +
-              (k.spark ? spark(k.spark, 26) : '') +
-            '</div>'
-          );
+          return '<div class="ktile"><button class="kx" data-rmk="' + key + '">' + icons.close + '</button><div class="klabel">' + k.label + '</div><div class="kval">' + k.val + '</div>' + (k.delta ? '<div class="kdelta" style="color:' + color + '">' + arrow + ' ' + k.delta + '</div>' : '') + (k.spark ? spark(k.spark, 26) : '') + '</div>';
         }
         function renderDetail(id) {
-          var d = dashboards.filter(function (x) { return x.id === id; })[0];
-          if (!d) return;
+          var d = dashboards.filter(function (x) { return x.id === id; })[0]; if (!d) return;
           var inner = document.getElementById("detail-inner");
-          var tiles = d.kpis.map(ktileHtml).join("");
           inner.innerHTML =
             '<button class="btn btn-ghost" id="back-btn" style="margin-bottom:24px">' + icons.back + ' Workspace</button>' +
-            '<div class="dhead"><span class="globe-accent"></span>' +
-              '<div><h2>' + d.name + '</h2><div class="dsub">' + d.sub + '</div></div>' +
-              '<div class="pills"><button>Daily</button><button>Weekly</button><button class="active">Monthly</button><button>90 days</button></div>' +
-            '</div>' +
+            '<div class="dhead"><span class="globe-accent"></span><div><h2>' + d.name + (d.id === primaryId ? ' <span style="font-size:12px;color:var(--brand)">★ Primary</span>' : '') + '</h2><div class="dsub">' + d.sub + '</div></div><div class="pills"><button>Daily</button><button>Weekly</button><button class="active">Monthly</button><button>90 days</button></div></div>' +
             '<p class="detail-desc">Your live performance picture. Add or connect any metric from the Stannect intelligence layer — contacts, estimates, conversion, cost, touchpoints and more.</p>' +
-            '<div class="kgrid">' + tiles +
-              '<div class="ktile add" id="add-metric"><div style="font-size:24px;line-height:1">+</div><div>Connect a metric</div></div>' +
-            '</div>';
+            '<div class="kgrid">' + d.kpis.map(ktileHtml).join("") + '<div class="ktile add" id="add-metric"><div style="font-size:24px;line-height:1">+</div><div>Connect a metric</div></div></div>';
           document.getElementById("back-btn").addEventListener("click", closeDash);
           document.getElementById("add-metric").addEventListener("click", openMetricModal);
-          inner.querySelectorAll("[data-rmk]").forEach(function (b) {
-            b.addEventListener("click", function () {
-              d.kpis = d.kpis.filter(function (k) { return k !== b.getAttribute("data-rmk"); });
-              renderDetail(id);
-            });
-          });
-          // time pills (decorative)
-          inner.querySelectorAll(".pills button").forEach(function (p) {
-            p.addEventListener("click", function () { inner.querySelectorAll(".pills button").forEach(function (q) { q.classList.remove("active"); }); p.classList.add("active"); });
-          });
+          inner.querySelectorAll("[data-rmk]").forEach(function (b) { b.addEventListener("click", function () { d.kpis = d.kpis.filter(function (k) { return k !== b.getAttribute("data-rmk"); }); renderDetail(id); }); });
+          inner.querySelectorAll(".pills button").forEach(function (p) { p.addEventListener("click", function () { inner.querySelectorAll(".pills button").forEach(function (q) { q.classList.remove("active"); }); p.classList.add("active"); }); });
         }
-        function openDash(id) {
-          activeId = id; renderDetail(id);
-          document.body.classList.add("in-dash");
-          document.getElementById("detail").scrollTop = 0;
-        }
+        var detail = document.getElementById("detail");
+        function openDash(id) { activeId = id; renderDetail(id); document.body.classList.add("in-dash"); detail.classList.remove("arriving"); void detail.offsetWidth; detail.classList.add("arriving"); detail.scrollTop = 0; }
         function closeDash() { document.body.classList.remove("in-dash"); activeId = null; }
 
-        /* ---------- Metric picker modal ---------- */
+        /* metric modal */
         var modal = document.getElementById("metric-modal");
         function openMetricModal() {
           var d = dashboards.filter(function (x) { return x.id === activeId; })[0]; if (!d) return;
-          var html2 = GROUPS.map(function (g) {
-            var items = g.keys.map(function (key) {
-              var added = d.kpis.indexOf(key) >= 0;
-              return '<div class="metric-item' + (added ? " added" : "") + '" data-key="' + key + '"><span class="mi-check">' + (added ? icons.check : "") + '</span><span class="mi-name">' + CAT[key].label + '</span></div>';
-            }).join("");
-            return '<div class="group-title">' + g.name + '</div><div class="metric-list">' + items + '</div>';
+          document.getElementById("metric-groups").innerHTML = GROUPS.map(function (g) {
+            return '<div class="group-title">' + g.name + '</div><div class="metric-list">' + g.keys.map(function (key) { var added = d.kpis.indexOf(key) >= 0; return '<div class="metric-item' + (added ? " added" : "") + '" data-key="' + key + '"><span class="mi-check">' + (added ? icons.check : "") + '</span><span class="mi-name">' + CAT[key].label + '</span></div>'; }).join("") + '</div>';
           }).join("");
-          document.getElementById("metric-groups").innerHTML = html2;
           modal.classList.add("show");
           document.getElementById("metric-groups").querySelectorAll(".metric-item").forEach(function (it) {
-            it.addEventListener("click", function () {
-              var key = it.getAttribute("data-key");
-              if (d.kpis.indexOf(key) >= 0) { d.kpis = d.kpis.filter(function (k) { return k !== key; }); }
-              else { d.kpis.push(key); }
-              renderDetail(activeId); openMetricModal();
-            });
+            it.addEventListener("click", function () { var key = it.getAttribute("data-key"); if (d.kpis.indexOf(key) >= 0) d.kpis = d.kpis.filter(function (k) { return k !== key; }); else d.kpis.push(key); renderDetail(activeId); openMetricModal(); });
           });
         }
         document.getElementById("metric-done").addEventListener("click", function () { modal.classList.remove("show"); });
         modal.addEventListener("click", function (e) { if (e.target === modal) modal.classList.remove("show"); });
 
-        /* ---------- Add dashboard ---------- */
+        /* add dashboard */
         var addBtn = document.getElementById("add-btn"), addPop = document.getElementById("add-pop"), nameInput = document.getElementById("dash-name");
         function openAdd(o) { addPop.hidden = !o; if (o) { nameInput.value = ""; setTimeout(function () { nameInput.focus(); }, 30); } }
         addBtn.addEventListener("click", function (e) { e.stopPropagation(); openAdd(addPop.hidden); });
         addPop.addEventListener("click", function (e) { e.stopPropagation(); });
         document.getElementById("add-cancel").addEventListener("click", function () { openAdd(false); });
-        function createDash() {
-          var name = (nameInput.value || "").trim() || "New Dashboard";
-          if (!/^dashboard/i.test(name)) name = "Dashboard " + name;
-          dashboards.push({ id: nid(), name: name, sub: "Custom dashboard", kind: "dashboard", accent: ((dashboards.length % 3) + 1), kpis: EXEC.slice(0, 8) });
-          openAdd(false); renderOrbit();
-        }
+        function createDash() { var name = (nameInput.value || "").trim() || "New Dashboard"; if (!/^dashboard/i.test(name)) name = "Dashboard " + name; dashboards.push({ id: nid(), name: name, sub: "Custom dashboard", kind: "dashboard", accent: ((dashboards.length % 3) + 1), kpis: EXEC.slice(0, 8) }); openAdd(false); renderOrbit(); updateSummary(); }
         document.getElementById("add-create").addEventListener("click", createDash);
         nameInput.addEventListener("keydown", function (e) { if (e.key === "Enter") createDash(); });
         document.addEventListener("click", function () { openAdd(false); });
         document.addEventListener("keydown", function (e) { if (e.key === "Escape") { openAdd(false); modal.classList.remove("show"); if (document.body.classList.contains("in-dash")) closeDash(); } });
 
-        /* ---------- Globe hover summary ---------- */
-        var summary = document.getElementById("summary");
-        worldHot.addEventListener("pointerenter", function () { summary.classList.add("show"); world.classList.add("hover"); });
-        worldHot.addEventListener("pointerleave", function () { summary.classList.remove("show"); world.classList.remove("hover"); });
+        function updateSummary() { document.getElementById("sum-big").textContent = dashboards.length + " connected dashboards"; document.getElementById("sum-sm").textContent = CAT.contacts.val + " contacts · " + CAT.estimatesWon.val + " estimates won · " + CAT.closedRevenue.val + " closed"; }
 
-        /* ---------- Parallax (whole constellation follows cursor) ---------- */
-        var world = document.getElementById("world");
-        var pT = { x: 0, y: 0 }, eT = { x: 0, y: 0 };
-        if (!reduceMotion) {
-          window.addEventListener("pointermove", function (e) {
-            pT.x = (e.clientX / window.innerWidth - 0.5) * 2;
-            pT.y = (e.clientY / window.innerHeight - 0.5) * 2;
-          }, { passive: true });
-        }
-        function paraLoop() {
-          var locked = document.body.classList.contains("in-dash");
-          var tx = locked ? 0 : pT.x, ty = locked ? 0 : pT.y;
-          eT.x += (tx - eT.x) * 0.06; eT.y += (ty - eT.y) * 0.06;
-          var dx = eT.x * 22, dy = eT.y * 16;
-          orbit.style.transform = "translate3d(" + dx + "px," + dy + "px,0)";
-          if (!locked) world.style.transform = "translate3d(" + dx + "px," + dy + "px,0)" + (world.classList.contains("hover") ? " scale(1.08)" : "");
-          requestAnimationFrame(paraLoop);
-        }
-        requestAnimationFrame(paraLoop);
-
-        /* ---------- Globe canvas ---------- */
-        var canvas = document.querySelector("#world canvas"), ctx = canvas.getContext("2d");
-        var N = 540, golden = Math.PI * (3 - Math.sqrt(5)), pts = [];
-        for (var i = 0; i < N; i++) { var y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), th = golden * i; pts.push({ x: Math.cos(th) * r, y: y, z: Math.sin(th) * r, ph: Math.random() * 6.28 }); }
-        var edges = [], seen = {};
-        for (var a = 0; a < N; a++) {
-          var ds = [];
-          for (var b = 0; b < N; b++) { if (a === b) continue; var ex = pts[a].x - pts[b].x, ey = pts[a].y - pts[b].y, ez = pts[a].z - pts[b].z; ds.push({ j: b, d: ex*ex+ey*ey+ez*ez }); }
-          ds.sort(function (m, n) { return m.d - n.d; });
-          for (var k = 0; k < 3; k++) { var j = ds[k].j, key = a < j ? a+"-"+j : j+"-"+a; if (!seen[key]) { seen[key] = 1; edges.push([a, j]); } }
-        }
-        var brand = "184,149,103";
-        function readBrand() { var v = getComputedStyle(html).getPropertyValue("--brand-rgb").trim(); if (v) brand = v; }
-        readBrand(); new MutationObserver(readBrand).observe(html, { attributes: true, attributeFilter: ["data-theme"] });
-
-        var W = 0, H = 0, DPR = 1;
-        function resize() {
-          var rect = canvas.getBoundingClientRect(); DPR = Math.min(window.devicePixelRatio || 1, 2);
-          W = rect.width; H = rect.height; canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
-          ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-        }
-        resize();
-        if (window.ResizeObserver) { new ResizeObserver(function () { resize(); layoutOrbit(); }).observe(scene); }
-        window.addEventListener("resize", function () { resize(); layoutOrbit(); });
-
-        var angle = 0, proj = pts.map(function () { return { x: 0, y: 0, z: 0 }; });
-        function frame() {
-          if (!reduceMotion) angle += 0.0016;
-          var cx = W / 2, cy = H * 0.5, R = Math.min(W, H) * 0.205;
-          var locked = document.body.classList.contains("in-dash");
-          var tilt = -0.32 + (locked ? 0 : eT.y * 0.18), ay = angle + (locked ? 0 : eT.x * 0.25);
-          var cA = Math.cos(ay), sA = Math.sin(ay), cT = Math.cos(tilt), sT = Math.sin(tilt);
-          for (var i = 0; i < N; i++) {
-            var p = pts[i], xz = p.x * cA + p.z * sA, zz = -p.x * sA + p.z * cA;
-            var yy = p.y * cT - zz * sT, zt = p.y * sT + zz * cT;
-            proj[i].x = cx + xz * R; proj[i].y = cy + yy * R; proj[i].z = zt;
-          }
-          ctx.clearRect(0, 0, W, H); ctx.lineWidth = 1;
-          for (var e = 0; e < edges.length; e++) {
-            var pa = proj[edges[e][0]], pb = proj[edges[e][1]], dep = (pa.z + pb.z) / 2;
-            if (dep < -0.55) continue;
-            var al = Math.max(0, (dep + 0.6) / 1.6) * 0.34;
-            ctx.strokeStyle = "rgba(" + brand + "," + al.toFixed(3) + ")";
-            ctx.beginPath(); ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y); ctx.stroke();
-          }
-          var t = performance.now() * 0.001;
-          for (var nn = 0; nn < N; nn++) {
-            var pp = proj[nn], front = (pp.z + 1) / 2;
-            var tw = reduceMotion ? 1 : 0.7 + 0.3 * Math.sin(t * 1.4 + pts[nn].ph);
-            ctx.beginPath(); ctx.fillStyle = "rgba(" + brand + "," + ((0.12 + front * 0.85) * tw).toFixed(3) + ")";
-            ctx.arc(pp.x, pp.y, 0.5 + front * 1.7, 0, 6.2832); ctx.fill();
-          }
-          requestAnimationFrame(frame);
-        }
-        frame();
-
-        /* ---------- init ---------- */
-        renderOrbit();
-        // update summary chip from live data
-        (function () {
-          var c = CAT.contacts.val, ew = CAT.estimatesWon.val, cr = CAT.closedRevenue.val;
-          document.getElementById("sum-big").textContent = dashboards.length + " connected dashboards";
-          document.getElementById("sum-sm").textContent = c + " contacts · " + ew + " estimates won · " + cr + " closed";
-        })();
+        renderOrbit(); updateSummary();
       })();
     </script>
   </body>
