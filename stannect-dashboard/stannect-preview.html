@@ -24,14 +24,14 @@
         background: var(--bg); color: var(--text); overflow-x: hidden;
         font-family: "Exo 2", system-ui, sans-serif; -webkit-font-smoothing: antialiased;
         transition: background .4s ease, color .4s ease;
-        background-image: radial-gradient(900px 600px at 78% -8%, var(--brand-10), transparent 60%), radial-gradient(700px 520px at 6% 18%, rgba(var(--brand-rgb),0.06), transparent 55%);
+        background-image: radial-gradient(1000px 700px at 78% -8%, var(--brand-10), transparent 60%), radial-gradient(800px 600px at 6% 18%, rgba(var(--brand-rgb),0.06), transparent 55%);
       }
       h1,h2,h3,h4,.heading { font-family: "Poppins","Montserrat",sans-serif; }
       ::selection { background: var(--brand); color: var(--bg); }
       button { font-family: inherit; }
 
       header { position: fixed; inset: 0 0 auto 0; z-index: 60; backdrop-filter: blur(6px); }
-      .bar { max-width: 1240px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+      .bar { max-width: 1320px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
       .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
       .logo img { height: 30px; display: block; }
       .logo-fallback { display: none; align-items: center; gap: 10px; }
@@ -43,17 +43,15 @@
       .btn:hover { transform: scale(1.03); } .btn:active { transform: scale(.96); }
       .btn-ghost { background: var(--surface); color: var(--text); border: 1px solid var(--border); box-shadow: none; }
 
-      .scene { position: relative; width: 100%; height: 100vh; overflow: hidden; }
-      .world { position: absolute; inset: 0; z-index: 1; transform-origin: 50% 50%; transition: transform .95s cubic-bezier(.7,0,.2,1), filter .95s ease; will-change: transform, filter; }
+      .scene { position: relative; width: 100%; height: 100vh; overflow: hidden; cursor: grab; touch-action: none; }
+      .scene.grabbing { cursor: grabbing; }
+      .world { position: absolute; inset: 0; z-index: 1; transform-origin: 50% 50%; transition: transform 1s cubic-bezier(.7,0,.2,1), filter 1s ease; will-change: transform, filter; pointer-events: none; }
       .world canvas { width: 100%; height: 100%; display: block; }
-      .world-hot { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); border-radius: 50%; z-index: 4; cursor: pointer; }
 
-      .intro { position: absolute; top: 90px; left: 0; right: 0; text-align: center; z-index: 6; pointer-events: none; padding: 0 24px; transition: opacity .4s; }
-      .intro .pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border); border-radius: 999px; padding: 6px 16px; font-size: 11px; text-transform: uppercase; letter-spacing: .25em; color: var(--text-muted); margin-bottom: 14px; background: var(--surface); }
+      .intro { position: absolute; top: 88px; left: 0; right: 0; text-align: center; z-index: 6; pointer-events: none; padding: 0 24px; transition: opacity .4s; }
+      .intro .pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--border); border-radius: 999px; padding: 7px 18px; font-size: 12px; text-transform: uppercase; letter-spacing: .28em; color: var(--text-muted); background: var(--surface); font-family: "Poppins"; }
+      .intro .hint { margin: 12px auto 0; font-size: 13px; color: var(--text-muted); opacity: .8; }
       .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--brand); animation: pulse 3.5s ease-in-out infinite; }
-      .intro h1 { font-size: clamp(28px,4.5vw,46px); font-weight: 600; margin: 0; line-height: 1.05; }
-      .intro h1 .accent { color: var(--brand); }
-      .intro p { margin: 10px auto 0; max-width: 520px; color: var(--text-muted); font-size: 15px; }
 
       .toolbar { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 30; display: flex; gap: 12px; align-items: center; transition: opacity .4s; }
 
@@ -63,15 +61,14 @@
       .summary .big { font-family: "Poppins"; font-weight: 600; font-size: 18px; }
       .summary .sm { font-size: 12px; color: var(--text-muted); }
 
-      .orbit { position: absolute; inset: 0; z-index: 10; }
-      #chains, #fx { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
-      #chains { z-index: 1; } #fx { z-index: 35; }
+      .orbit { position: absolute; inset: 0; z-index: 10; pointer-events: none; }
+      #chains { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 1; }
       .ocard {
-        position: absolute; width: 234px; border-radius: 18px; padding: 16px; cursor: pointer; z-index: 2;
-        background: var(--surface); border: 1px solid var(--border); box-shadow: 0 20px 55px -22px rgba(0,0,0,.55);
+        position: absolute; width: 226px; border-radius: 18px; padding: 16px; cursor: pointer; z-index: 2; pointer-events: auto;
+        background: var(--surface); border: 1px solid var(--border); box-shadow: 0 22px 60px -22px rgba(0,0,0,.6);
         transition: box-shadow .3s; will-change: transform, left, top, filter; transform: translate(-50%,-50%);
       }
-      .ocard:hover { box-shadow: 0 0 0 1px var(--brand-10), 0 30px 80px -26px var(--brand-30); }
+      .ocard:hover { box-shadow: 0 0 0 1px var(--brand-10), 0 32px 84px -26px var(--brand-30); }
       .ocard .rule { position: absolute; left: 16px; right: 16px; top: 0; height: 1px; }
       .ocard-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
       .ocard-ico { width: 38px; height: 38px; border-radius: 11px; background: var(--brand-10); color: var(--brand); display: flex; align-items: center; justify-content: center; flex: none; }
@@ -83,28 +80,26 @@
       .ocard .open-hint { margin-top: 12px; font-size: 12px; color: var(--brand); opacity: 0; transition: opacity .25s; display: flex; align-items: center; gap: 6px; }
       .ocard:hover .open-hint { opacity: 1; }
       .ocard .ctl { position: absolute; top: 9px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); opacity: 0; transition: opacity .2s, color .2s; background: none; border: none; cursor: pointer; padding: 4px; }
-      .ocard:hover .ctl { opacity: .8; } .ocard .ctl:hover { color: var(--brand); opacity: 1; }
+      .ocard:hover .ctl { opacity: .85; } .ocard .ctl:hover { color: var(--brand); opacity: 1; }
       .ocard .ctl.star { left: 9px; } .ocard .ctl.x { right: 9px; }
       .ocard .ctl.star.on { opacity: 1; color: var(--brand); }
       .ocard .badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--brand); color: var(--bg); font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; display: none; }
       .ocard.primary .badge { display: block; }
 
-      .shot-core { fill: none; stroke: var(--brand); stroke-width: 2; stroke-linecap: round; filter: drop-shadow(0 0 6px var(--brand)); }
-      .shot-pulse { fill: var(--brand); filter: drop-shadow(0 0 5px var(--brand)); }
-      .chain-core { fill: none; stroke: var(--brand); stroke-opacity: .2; stroke-width: 1.5; }
-      .chain-links { fill: none; stroke: var(--brand); stroke-opacity: .6; stroke-width: 4; stroke-linecap: round; stroke-dasharray: .5 11; animation: dash 1.6s linear infinite; }
+      .chain-core { fill: none; stroke: var(--brand); stroke-opacity: .16; stroke-width: 1.2; }
+      .chain-link { fill: none; stroke: var(--brand); stroke-width: 2; }
       .chain-anchor { fill: var(--brand); }
       .chain-pulse { fill: var(--brand); }
 
       #bloom { position: fixed; left: 50%; top: 50%; width: 40px; height: 40px; border-radius: 50%; transform: translate(-50%,-50%) scale(1); background: radial-gradient(circle, var(--brand) 0%, transparent 68%); opacity: 0; pointer-events: none; z-index: 45; }
-      #bloom.go { animation: bloom .85s ease-out forwards; }
+      #bloom.go { animation: bloom .9s ease-out forwards; }
 
-      /* Detail */
       .detail { position: fixed; inset: 0; z-index: 50; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity .5s ease; }
       body.in-dash .detail { opacity: 1; pointer-events: auto; }
-      body.in-dash .world { transform: scale(2.4) !important; filter: blur(3px) brightness(1.08); }
+      body.in-dash .world { transform: scale(2.6) !important; filter: blur(3px) brightness(1.08); }
       body.in-dash .orbit, body.in-dash .intro, body.in-dash .toolbar, body.in-dash .summary { opacity: 0; pointer-events: none; }
-      .detail-bg { position: fixed; inset: 0; background: var(--bg); opacity: .86; z-index: -1; }
+      body.in-dash .scene { cursor: default; }
+      .detail-bg { position: fixed; inset: 0; background: var(--bg); opacity: .87; z-index: -1; }
       .detail-inner { max-width: 1240px; margin: 0 auto; padding: 96px 24px 80px; }
       .detail.arriving .detail-inner { animation: arrive .85s cubic-bezier(.22,1,.36,1) both; }
       .dhead { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-bottom: 8px; }
@@ -148,11 +143,10 @@
 
       @keyframes pulse { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
       @keyframes fadeUp { 0% { opacity: 0; transform: translateY(14px) scale(.98); } 100% { opacity: 1; transform: none; } }
-      @keyframes dash { to { stroke-dashoffset: -24; } }
-      @keyframes bloom { 0% { opacity: 0; transform: translate(-50%,-50%) scale(1); } 18% { opacity: .6; } 100% { opacity: 0; transform: translate(-50%,-50%) scale(55); } }
+      @keyframes bloom { 0% { opacity: 0; transform: translate(-50%,-50%) scale(1); } 18% { opacity: .6; } 100% { opacity: 0; transform: translate(-50%,-50%) scale(58); } }
       @keyframes arrive { 0% { opacity: 0; transform: translateY(34px) scale(1.06); filter: blur(9px); } 60% { opacity: 1; } 100% { opacity: 1; transform: none; filter: none; } }
       @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; } }
-      @media (max-width: 720px) { .ocard { width: 184px; padding: 13px; } .intro h1 { font-size: 25px; } }
+      @media (max-width: 720px) { .ocard { width: 176px; padding: 13px; } }
     </style>
   </head>
   <body>
@@ -171,15 +165,12 @@
 
     <div class="scene" id="scene">
       <div class="world" id="world"><canvas></canvas></div>
-      <div class="world-hot" id="world-hot" aria-hidden="true"></div>
       <div class="summary" id="summary"><div class="box"><div class="big" id="sum-big"></div><div class="sm" id="sum-sm"></div></div></div>
       <div class="intro" id="intro">
         <span class="pill"><span class="dot"></span> Stannect Command Center</span>
-        <h1>Where your business meets <span class="accent">automation</span></h1>
-        <p>Move around the world to explore your dashboards — click one to step inside its KPIs.</p>
+        <div class="hint">Drag to orbit the world · click a dashboard to step inside · ★ sets your primary</div>
       </div>
       <div class="orbit" id="orbit"><svg id="chains" aria-hidden="true"></svg></div>
-      <svg id="fx" aria-hidden="true"><path id="shot-path" class="shot-core" d=""></path></svg>
       <div class="toolbar" id="toolbar">
         <div style="position:relative">
           <button class="btn" id="add-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg> Add dashboard</button>
@@ -193,9 +184,7 @@
     </div>
 
     <div id="bloom"></div>
-
     <div class="detail" id="detail"><div class="detail-bg"></div><div class="detail-inner" id="detail-inner"></div></div>
-
     <div class="modal-wrap" id="metric-modal">
       <div class="modal">
         <h3>Connect a metric</h3>
@@ -210,8 +199,8 @@
         "use strict";
         var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         var html = document.documentElement;
+        var SVGNS = "http://www.w3.org/2000/svg";
 
-        /* Theme */
         var sun = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>';
         var moon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8z"/></svg>';
         try { var sv = localStorage.getItem("stannect-theme"); if (sv) html.setAttribute("data-theme", sv); } catch (e) {}
@@ -232,7 +221,6 @@
         };
         function accentVar(n) { return n === 2 ? "var(--accent-2)" : n === 3 ? "var(--accent-3)" : "var(--accent-1)"; }
 
-        /* KPI catalog (from Stannect KPI research) */
         var CAT = {
           contacts:{label:"Contacts",val:"1,204",delta:"+46",up:true,good:true,spark:[60,72,68,80,86,90,98,110]},
           estimatesSent:{label:"Estimates Sent",val:"318",delta:"+12",up:true,good:true,spark:[18,22,20,26,28,30,34,38]},
@@ -308,15 +296,12 @@
         var scene = document.getElementById("scene");
         var orbit = document.getElementById("orbit");
         var chains = document.getElementById("chains");
-        var fx = document.getElementById("fx");
-        var shotPath = document.getElementById("shot-path");
         var world = document.getElementById("world");
-        var worldHot = document.getElementById("world-hot");
         var summary = document.getElementById("summary");
         var bloom = document.getElementById("bloom");
+        var LINKS = 16; // chain links per connector
 
-        var nodes = []; // {d, el, hf, core, links, anchor}
-
+        var nodes = [];
         function ocardHtml(d) {
           var lead = CAT[d.kpis.indexOf("closedRevenue") >= 0 ? "closedRevenue" : d.kpis[0]];
           var ic = d.kind === "integration" ? icons.integration : icons.dashboard;
@@ -334,151 +319,164 @@
             '</div>'
           );
         }
+        function order() { var p = dashboards.filter(function (d) { return d.id === primaryId; }); var rest = dashboards.filter(function (d) { return d.id !== primaryId; }); return p.concat(rest); }
 
-        function order() {
-          // primary first, rest in stable order
-          var p = dashboards.filter(function (d) { return d.id === primaryId; });
-          var rest = dashboards.filter(function (d) { return d.id !== primaryId; });
-          return p.concat(rest);
-        }
+        function mkSvg(tag, attrs) { var el = document.createElementNS(SVGNS, tag); for (var k in attrs) el.setAttribute(k, attrs[k]); return el; }
 
         function renderOrbit() {
           orbit.querySelectorAll(".ocard").forEach(function (n) { n.remove(); });
+          chains.innerHTML = "";
           nodes = [];
-          var od = order();
-          var chainSvg = "";
-          od.forEach(function (d, i) { chainSvg += '<path id="cp' + i + '" class="chain-core" d=""></path><path class="chain-links" data-i="' + i + '" d=""></path><circle class="chain-anchor" data-i="' + i + '" r="4"></circle><circle class="chain-pulse" r="2.3"><animateMotion dur="3s" repeatCount="indefinite"><mpath href="#cp' + i + '"></mpath></animateMotion></circle>'; });
-          chains.innerHTML = chainSvg;
+          var od = order(), n = od.length;
           od.forEach(function (d, i) {
             orbit.insertAdjacentHTML("beforeend", ocardHtml(d));
             var el = orbit.lastElementChild;
-            var nd = { d: d, el: el, hf: 1, isP: d.id === primaryId, i: i,
-              core: chains.querySelector("#cp" + i), links: chains.querySelector('.chain-links[data-i="' + i + '"]'), anchor: chains.querySelector('.chain-anchor[data-i="' + i + '"]') };
-            // deterministic scattered layout
-            if (nd.isP) { nd.ang = Math.PI * 0.5; nd.radF = 0.46; nd.depth = 1.28; nd.ph = 0; }
-            else { nd.ang = -Math.PI / 2 + (i * 2.39996); nd.radF = 0.72 + rnd(i, 1) * 0.5; nd.depth = 0.58 + rnd(i, 2) * 0.6; nd.ph = rnd(i, 3) * 6.28; }
-            el.style.zIndex = String(3 + Math.round(nd.depth * 100));
-            el.addEventListener("click", function () { if (!busy) selectDash(d.id); });
+            // chain group: faint core + anchor dot + interlocking links
+            var g = mkSvg("g", {});
+            var core = mkSvg("path", { "class": "chain-core", d: "" });
+            var anchor = mkSvg("circle", { "class": "chain-anchor", r: "4" });
+            g.appendChild(core);
+            var linkEls = [];
+            for (var L = 0; L < LINKS; L++) { var le = mkSvg("ellipse", { "class": "chain-link", rx: "7.5", ry: "3" }); g.appendChild(le); linkEls.push(le); }
+            g.appendChild(anchor);
+            chains.appendChild(g);
+
+            var isP = d.id === primaryId;
+            var nd = { d: d, el: el, g: g, core: core, anchor: anchor, linkEls: linkEls, hf: 1, hover: false, flash: 0 };
+            nd.A = (i / n) * Math.PI * 2;                 // base azimuth (primary -> 0 = front)
+            nd.E = isP ? -0.30 : (rnd(i, 5) - 0.5) * 0.9; // elevation scatter
+            nd.ph = rnd(i, 3) * 6.28;
+            el.addEventListener("click", function () { if (dragMoved) return; selectDash(d.id); });
             el.addEventListener("pointerenter", function () { nd.hover = true; });
             el.addEventListener("pointerleave", function () { nd.hover = false; });
-            el.querySelector("[data-star]").addEventListener("click", function (e) { e.stopPropagation(); primaryId = d.id; renderOrbit(); });
-            el.querySelector("[data-del]").addEventListener("click", function (e) { e.stopPropagation(); dashboards = dashboards.filter(function (x) { return x.id !== d.id; }); if (primaryId === d.id && dashboards[0]) primaryId = dashboards[0].id; renderOrbit(); });
+            el.querySelector("[data-star]").addEventListener("click", function (e) { e.stopPropagation(); setPrimary(d.id); });
+            el.querySelector("[data-del]").addEventListener("click", function (e) { e.stopPropagation(); dashboards = dashboards.filter(function (x) { return x.id !== d.id; }); if (primaryId === d.id && dashboards[0]) primaryId = dashboards[0].id; renderOrbit(); updateSummary(); });
             nodes.push(nd);
           });
         }
+        function setPrimary(id) { primaryId = id; dragRot = -cursorRot; renderOrbit(); }
 
-        /* layout + animation loop */
-        var pT = { x: 0, y: 0 }, eT = { x: 0, y: 0 };
-        if (!reduce) window.addEventListener("pointermove", function (e) { pT.x = (e.clientX / window.innerWidth - 0.5) * 2; pT.y = (e.clientY / window.innerHeight - 0.5) * 2; }, { passive: true });
+        /* control: drag + cursor rotate the world */
+        var pT = { x: 0, y: 0 };
+        var dragRot = 0, dragElev = 0, cursorRot = 0, cursorElev = 0;
+        var dragging = false, dragMoved = false, lastX = 0, lastY = 0;
+        scene.addEventListener("pointerdown", function (e) { if (document.body.classList.contains("in-dash")) return; dragging = true; dragMoved = false; lastX = e.clientX; lastY = e.clientY; scene.classList.add("grabbing"); });
+        window.addEventListener("pointermove", function (e) {
+          pT.x = (e.clientX / window.innerWidth - 0.5) * 2; pT.y = (e.clientY / window.innerHeight - 0.5) * 2;
+          if (dragging) {
+            var dx = e.clientX - lastX, dy = e.clientY - lastY; lastX = e.clientX; lastY = e.clientY;
+            if (Math.abs(dx) + Math.abs(dy) > 3) dragMoved = true;
+            dragRot += dx * 0.006; dragElev += dy * 0.004; if (dragElev > 0.5) dragElev = 0.5; if (dragElev < -0.5) dragElev = -0.5;
+          }
+        }, { passive: true });
+        window.addEventListener("pointerup", function () { dragging = false; scene.classList.remove("grabbing"); });
 
         var W = 0, H = 0, DPR = 1, ballX = 0, ballY = 0, ballR = 0;
         var canvas = document.querySelector("#world canvas"), ctx = canvas.getContext("2d");
-        function resize() {
-          var rect = scene.getBoundingClientRect(); DPR = Math.min(window.devicePixelRatio || 1, 2);
-          W = rect.width; H = rect.height; canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR); ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-          var d = Math.min(W, H) * 0.42; worldHot.style.width = d + "px"; worldHot.style.height = d + "px";
-        }
+        function resize() { var rect = scene.getBoundingClientRect(); DPR = Math.min(window.devicePixelRatio || 1, 2); W = rect.width; H = rect.height; canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR); ctx.setTransform(DPR, 0, 0, DPR, 0, 0); }
         resize();
         if (window.ResizeObserver) new ResizeObserver(resize).observe(scene);
         window.addEventListener("resize", resize);
 
-        // globe geometry
-        var N = 540, golden = Math.PI * (3 - Math.sqrt(5)), pts = [];
+        var N = 640, golden = Math.PI * (3 - Math.sqrt(5)), pts = [];
         for (var gi = 0; gi < N; gi++) { var gy = 1 - (gi / (N - 1)) * 2, gr = Math.sqrt(1 - gy * gy), gt = golden * gi; pts.push({ x: Math.cos(gt) * gr, y: gy, z: Math.sin(gt) * gr, ph: Math.random() * 6.28 }); }
         var edges = [], seen = {};
-        for (var ai = 0; ai < N; ai++) { var dd = []; for (var bi = 0; bi < N; bi++) { if (ai === bi) continue; var ex = pts[ai].x - pts[bi].x, ey = pts[ai].y - pts[bi].y, ez = pts[ai].z - pts[bi].z; dd.push({ j: bi, d: ex*ex+ey*ey+ez*ez }); } dd.sort(function (m, n) { return m.d - n.d; }); for (var kk = 0; kk < 3; kk++) { var jj = dd[kk].j, key = ai < jj ? ai+"-"+jj : jj+"-"+ai; if (!seen[key]) { seen[key] = 1; edges.push([ai, jj]); } } }
+        for (var ax = 0; ax < N; ax++) { var dd = []; for (var bx = 0; bx < N; bx++) { if (ax === bx) continue; var ex = pts[ax].x - pts[bx].x, ey = pts[ax].y - pts[bx].y, ez = pts[ax].z - pts[bx].z; dd.push({ j: bx, d: ex*ex+ey*ey+ez*ez }); } dd.sort(function (m, n) { return m.d - n.d; }); for (var kk = 0; kk < 3; kk++) { var jj = dd[kk].j, key = ax < jj ? ax+"-"+jj : jj+"-"+ax; if (!seen[key]) { seen[key] = 1; edges.push([ax, jj]); } } }
         var brand = "184,149,103";
         function readBrand() { var v = getComputedStyle(html).getPropertyValue("--brand-rgb").trim(); if (v) brand = v; }
         readBrand(); new MutationObserver(readBrand).observe(html, { attributes: true, attributeFilter: ["data-theme"] });
-        var angle = 0, proj = pts.map(function () { return { x: 0, y: 0, z: 0 }; });
+        var proj = pts.map(function () { return { x: 0, y: 0, z: 0 }; });
+        var flow = 0;
 
         function tick() {
           var locked = document.body.classList.contains("in-dash");
-          var tx = locked ? 0 : pT.x, ty = locked ? 0 : pT.y;
-          eT.x += (tx - eT.x) * 0.045; eT.y += (ty - eT.y) * 0.045;
+          var ctx2 = dragging || locked ? 0 : pT.x, cty = dragging || locked ? 0 : pT.y;
+          cursorRot += (ctx2 * 0.4 - cursorRot) * 0.05;
+          cursorElev += (-cty * 0.22 - cursorElev) * 0.05;
+          var R = dragRot + cursorRot;
+          var T = dragElev + cursorElev; if (T > 0.55) T = 0.55; if (T < -0.55) T = -0.55;
           var t = performance.now() * 0.001;
+          flow += reduce ? 0 : 0.0022;
 
-          // ball center (parallax depth ~0.9)
-          var cx = W / 2, cy = H * 0.5;
-          ballR = Math.min(W, H) * 0.2;
-          ballX = cx + eT.x * 22 * 0.9; ballY = cy + eT.y * 16 * 0.9;
+          var cx = W / 2, cy = H * 0.52;
+          ballR = Math.min(W, H) * 0.33;
+          ballX = cx; ballY = cy;
 
-          // globe draw
-          if (!reduce) angle += 0.0015;
-          var tilt = -0.32 + (locked ? 0 : eT.y * 0.16), ay = angle + (locked ? 0 : eT.x * 0.22);
+          // globe rotates with the world
+          var tilt = -0.18 + T, ay = R;
           var cA = Math.cos(ay), sA = Math.sin(ay), cT = Math.cos(tilt), sT = Math.sin(tilt);
           for (var i = 0; i < N; i++) { var p = pts[i], xz = p.x * cA + p.z * sA, zz = -p.x * sA + p.z * cA; var yy = p.y * cT - zz * sT, zt = p.y * sT + zz * cT; proj[i].x = ballX + xz * ballR; proj[i].y = ballY + yy * ballR; proj[i].z = zt; }
           ctx.clearRect(0, 0, W, H); ctx.lineWidth = 1;
           for (var e = 0; e < edges.length; e++) { var pa = proj[edges[e][0]], pb = proj[edges[e][1]], dep = (pa.z + pb.z) / 2; if (dep < -0.55) continue; var al = Math.max(0, (dep + 0.6) / 1.6) * 0.34; ctx.strokeStyle = "rgba(" + brand + "," + al.toFixed(3) + ")"; ctx.beginPath(); ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y); ctx.stroke(); }
-          for (var nnn = 0; nnn < N; nnn++) { var pp = proj[nnn], fr = (pp.z + 1) / 2; var tw = reduce ? 1 : 0.7 + 0.3 * Math.sin(t * 1.4 + pts[nnn].ph); ctx.beginPath(); ctx.fillStyle = "rgba(" + brand + "," + ((0.12 + fr * 0.85) * tw).toFixed(3) + ")"; ctx.arc(pp.x, pp.y, 0.5 + fr * 1.7, 0, 6.2832); ctx.fill(); }
+          for (var nn = 0; nn < N; nn++) { var pp = proj[nn], fr = (pp.z + 1) / 2; var tw = reduce ? 1 : 0.7 + 0.3 * Math.sin(t * 1.4 + pts[nn].ph); ctx.beginPath(); ctx.fillStyle = "rgba(" + brand + "," + ((0.12 + fr * 0.85) * tw).toFixed(3) + ")"; ctx.arc(pp.x, pp.y, 0.5 + fr * 1.7, 0, 6.2832); ctx.fill(); }
 
-          // cards + chains
-          var ringR = Math.min(W, H) * 0.42;
+          var orbitR = Math.min(W, H) * 0.49;
           for (var c = 0; c < nodes.length; c++) {
             var nd = nodes[c], el = nd.el;
-            var rad = ringR * nd.radF;
-            var wx = cx + Math.cos(nd.ang) * rad;
-            var wy = cy + Math.sin(nd.ang) * rad;
-            var fx2 = reduce ? 0 : Math.sin(t * 0.5 + nd.ph) * 7 * nd.depth;
-            var fy2 = reduce ? 0 : Math.cos(t * 0.42 + nd.ph * 1.3) * 7 * nd.depth;
-            var par = locked ? 0 : 1;
-            var sx = wx + fx2 + eT.x * 34 * nd.depth * par;
-            var sy = wy + fy2 + eT.y * 26 * nd.depth * par;
-            // ease hover factor
+            var az = nd.A + R, elv = nd.E + T * 0.4;
+            var dirX = Math.cos(elv) * Math.sin(az);
+            var dirY = Math.sin(elv);
+            var dirZ = Math.cos(elv) * Math.cos(az);  // 1 = front, -1 = back
+            var bob = reduce ? 0 : Math.sin(t * 0.5 + nd.ph) * 8;
+            var sx = cx + dirX * orbitR;
+            var sy = cy - dirY * orbitR + bob;
+            var depth01 = (dirZ + 1) / 2; // 0 back .. 1 front
             var tgt = nd.hover ? 1.12 : 1; nd.hf += (tgt - nd.hf) * 0.12;
-            var sc = nd.depth * nd.hf;
+            var sc = (0.6 + depth01 * 0.72) * nd.hf;
             el.style.left = sx + "px"; el.style.top = sy + "px";
             el.style.transform = "translate(-50%,-50%) scale(" + sc.toFixed(3) + ")";
-            var blurAmt = Math.max(0, (1 - nd.depth)) * 3.2;
-            el.style.filter = (nd.hover ? "" : (blurAmt > 0.2 ? "blur(" + blurAmt.toFixed(2) + "px) " : "")) + "brightness(" + (0.82 + nd.depth * 0.2).toFixed(3) + ")";
-            // chain: ball edge -> card near edge
-            var dx = sx - ballX, dy = sy - ballY, len = Math.hypot(dx, dy) || 1, ux = dx / len, uy = dy / len;
-            var ax = ballX + ux * ballR, ayy = ballY + uy * ballR;
-            var halfH = (el.offsetHeight * sc) / 2 + 6;
-            var exx = sx - ux * halfH, eyy = sy - uy * halfH;
-            var mx = (ax + exx) / 2 + (-uy) * 14, my = (ayy + eyy) / 2 + ux * 14;
-            var dpath = "M" + ax.toFixed(1) + " " + ayy.toFixed(1) + " Q" + mx.toFixed(1) + " " + my.toFixed(1) + " " + exx.toFixed(1) + " " + eyy.toFixed(1);
-            nd.core.setAttribute("d", dpath); nd.links.setAttribute("d", dpath);
-            nd.anchor.setAttribute("cx", ax.toFixed(1)); nd.anchor.setAttribute("cy", ayy.toFixed(1));
-            var depthOpacity = locked ? 0 : (0.45 + nd.depth * 0.4);
-            nd.core.setAttribute("stroke-opacity", (depthOpacity * 0.5).toFixed(2));
-            nd.links.setAttribute("stroke-opacity", depthOpacity.toFixed(2));
+            el.style.zIndex = String(2 + Math.round(depth01 * 600));
+            var blurAmt = nd.hover ? 0 : (1 - depth01) * 3.4;
+            el.style.filter = (blurAmt > 0.25 ? "blur(" + blurAmt.toFixed(2) + "px) " : "") + "brightness(" + (0.74 + depth01 * 0.3).toFixed(3) + ")";
+            el.style.opacity = locked ? "0" : (0.55 + depth01 * 0.45).toFixed(3);
+
+            // chain: globe rim (in card's screen direction) -> card near edge
+            var ddx = sx - ballX, ddy = sy - ballY, dlen = Math.hypot(ddx, ddy) || 1, ux = ddx / dlen, uy = ddy / dlen;
+            var P0x = ballX + ux * ballR, P0y = ballY + uy * ballR;
+            var halfH = (el.offsetHeight * sc) / 2 + 8;
+            var P1x = sx - ux * halfH, P1y = sy - uy * halfH;
+            var bow = 18;
+            var Cx = (P0x + P1x) / 2 + (-uy) * bow, Cy = (P0y + P1y) / 2 + ux * bow;
+            nd.core.setAttribute("d", "M" + P0x.toFixed(1) + " " + P0y.toFixed(1) + " Q" + Cx.toFixed(1) + " " + Cy.toFixed(1) + " " + P1x.toFixed(1) + " " + P1y.toFixed(1));
+            nd.anchor.setAttribute("cx", P0x.toFixed(1)); nd.anchor.setAttribute("cy", P0y.toFixed(1));
+            // place interlocking links along the quadratic Bézier
+            for (var L = 0; L < LINKS; L++) {
+              var u = (L / LINKS + flow); u = u - Math.floor(u);
+              var omu = 1 - u;
+              var bx2 = omu * omu * P0x + 2 * omu * u * Cx + u * u * P1x;
+              var by2 = omu * omu * P0y + 2 * omu * u * Cy + u * u * P1y;
+              var tx = 2 * omu * (Cx - P0x) + 2 * u * (P1x - Cx);
+              var ty = 2 * omu * (Cy - P0y) + 2 * u * (P1y - Cy);
+              var ang = Math.atan2(ty, tx) * 180 / Math.PI + (L % 2 ? 90 : 0);
+              nd.linkEls[L].setAttribute("transform", "translate(" + bx2.toFixed(1) + " " + by2.toFixed(1) + ") rotate(" + ang.toFixed(1) + ")");
+            }
+            var gop = locked ? 0 : (0.4 + depth01 * 0.6);
+            if (nd.flash > t) { gop = 1; nd.g.style.filter = "drop-shadow(0 0 5px var(--brand))"; } else { nd.g.style.filter = ""; }
+            nd.g.style.opacity = gop.toFixed(2);
           }
           requestAnimationFrame(tick);
         }
         requestAnimationFrame(tick);
 
-        /* hover summary */
-        worldHot.addEventListener("pointerenter", function () { if (!document.body.classList.contains("in-dash")) { summary.classList.add("show"); world.classList.add("hover"); } });
-        worldHot.addEventListener("pointerleave", function () { summary.classList.remove("show"); world.classList.remove("hover"); });
+        /* hover summary on the globe (center area, when no card grabbing) */
+        scene.addEventListener("pointermove", function (e) {
+          if (document.body.classList.contains("in-dash") || dragging) { summary.classList.remove("show"); return; }
+          var r = scene.getBoundingClientRect(); var dx = (e.clientX - r.left) - ballX, dy = (e.clientY - r.top) - ballY;
+          var over = Math.hypot(dx, dy) < ballR * 0.92 && e.target === scene;
+          summary.classList.toggle("show", over);
+        });
+        scene.addEventListener("pointerleave", function () { summary.classList.remove("show"); });
 
-        /* selection: shoot chain -> bloom -> warp into dashboard */
-        var busy = false;
+        /* selection: flash the chosen chain -> bloom -> warp into dashboard */
         function selectDash(id) {
           var nd = null; for (var c = 0; c < nodes.length; c++) if (nodes[c].d.id === id) nd = nodes[c];
-          if (!nd) { openDash(id); return; }
-          busy = true;
-          var rect = nd.el.getBoundingClientRect(), srect = scene.getBoundingClientRect();
-          var tx = rect.left + rect.width / 2 - srect.left, ty = rect.top + rect.height / 2 - srect.top;
-          var d = "M" + ballX.toFixed(1) + " " + ballY.toFixed(1) + " L" + tx.toFixed(1) + " " + ty.toFixed(1);
-          shotPath.setAttribute("d", d);
-          var len = 0; try { len = shotPath.getTotalLength(); } catch (e) { len = Math.hypot(tx - ballX, ty - ballY); }
-          shotPath.style.transition = "none"; shotPath.style.strokeDasharray = len; shotPath.style.strokeDashoffset = len; shotPath.style.opacity = "1";
-          // force reflow then draw in
-          void shotPath.getBoundingClientRect();
-          shotPath.style.transition = "stroke-dashoffset .42s cubic-bezier(.6,0,.2,1)";
-          shotPath.style.strokeDashoffset = "0";
-          setTimeout(function () {
-            // bloom from ball
-            bloom.style.left = (srect.left + ballX) + "px"; bloom.style.top = (srect.top + ballY) + "px";
-            bloom.classList.remove("go"); void bloom.offsetWidth; bloom.classList.add("go");
-            openDash(id);
-            shotPath.style.transition = "opacity .3s"; shotPath.style.opacity = "0";
-            busy = false;
-          }, 430);
+          var t = performance.now() * 0.001;
+          if (nd) nd.flash = t + 0.5;
+          var r = scene.getBoundingClientRect();
+          bloom.style.left = (r.left + ballX) + "px"; bloom.style.top = (r.top + ballY) + "px";
+          setTimeout(function () { bloom.classList.remove("go"); void bloom.offsetWidth; bloom.classList.add("go"); openDash(id); }, 360);
         }
 
-        /* detail */
         function ktileHtml(key) {
           var k = CAT[key]; if (!k) return "";
           var arrow = k.up === true ? "▲" : k.up === false ? "▼" : "";
@@ -502,7 +500,6 @@
         function openDash(id) { activeId = id; renderDetail(id); document.body.classList.add("in-dash"); detail.classList.remove("arriving"); void detail.offsetWidth; detail.classList.add("arriving"); detail.scrollTop = 0; }
         function closeDash() { document.body.classList.remove("in-dash"); activeId = null; }
 
-        /* metric modal */
         var modal = document.getElementById("metric-modal");
         function openMetricModal() {
           var d = dashboards.filter(function (x) { return x.id === activeId; })[0]; if (!d) return;
@@ -517,11 +514,12 @@
         document.getElementById("metric-done").addEventListener("click", function () { modal.classList.remove("show"); });
         modal.addEventListener("click", function (e) { if (e.target === modal) modal.classList.remove("show"); });
 
-        /* add dashboard */
         var addBtn = document.getElementById("add-btn"), addPop = document.getElementById("add-pop"), nameInput = document.getElementById("dash-name");
         function openAdd(o) { addPop.hidden = !o; if (o) { nameInput.value = ""; setTimeout(function () { nameInput.focus(); }, 30); } }
         addBtn.addEventListener("click", function (e) { e.stopPropagation(); openAdd(addPop.hidden); });
+        addBtn.addEventListener("pointerdown", function (e) { e.stopPropagation(); });
         addPop.addEventListener("click", function (e) { e.stopPropagation(); });
+        addPop.addEventListener("pointerdown", function (e) { e.stopPropagation(); });
         document.getElementById("add-cancel").addEventListener("click", function () { openAdd(false); });
         function createDash() { var name = (nameInput.value || "").trim() || "New Dashboard"; if (!/^dashboard/i.test(name)) name = "Dashboard " + name; dashboards.push({ id: nid(), name: name, sub: "Custom dashboard", kind: "dashboard", accent: ((dashboards.length % 3) + 1), kpis: EXEC.slice(0, 8) }); openAdd(false); renderOrbit(); updateSummary(); }
         document.getElementById("add-create").addEventListener("click", createDash);
