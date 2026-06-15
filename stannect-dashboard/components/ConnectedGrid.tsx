@@ -49,19 +49,20 @@ export default function ConnectedGrid() {
     const hx = hubEl.offsetLeft + hubEl.offsetWidth / 2;
     const hy = hubEl.offsetTop + hubEl.offsetHeight; // chain leaves hub bottom
 
+    // Iterate the registered card elements directly (the hub uses its own ref
+    // and is never in this map), so measure has no array dependency and stays
+    // referentially stable — avoiding a setState/effect render loop.
     const next: Line[] = [];
-    for (const c of others) {
-      const el = cardRefs.current.get(c.id);
-      if (!el) continue;
+    cardRefs.current.forEach((el, id) => {
       const cx = el.offsetLeft + el.offsetWidth / 2;
       const cy = el.offsetTop + 4; // chain meets card top
       // Gentle quadratic bow so chains drape like real links.
       const mx = (hx + cx) / 2;
       const my = (hy + cy) / 2 + Math.min(48, Math.abs(cx - hx) * 0.18);
-      next.push({ id: c.id, d: `M${hx} ${hy} Q${mx} ${my} ${cx} ${cy}` });
-    }
+      next.push({ id, d: `M${hx} ${hy} Q${mx} ${my} ${cx} ${cy}` });
+    });
     setLines(next);
-  }, [others]);
+  }, []);
 
   useLayoutEffect(() => {
     measure();

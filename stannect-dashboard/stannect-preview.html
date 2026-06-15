@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stannect — Where Your Business Meets Automation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Exo+2:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ---- Stannect brand tokens (per Stannect_Branding.MD) ---- */
+      :root {
+        --bg: #edeee7;
+        --brand: #a2825d;
+        --accent-1: #bdbca8;
+        --accent-2: #b4a98f;
+        --accent-3: #ab9576;
+        --surface: #f5f5f0;
+        --surface-2: rgba(255, 255, 255, 0.8);
+        --border: #d8d6cb;
+        --text: #2e2a24;
+        --text-muted: #6b6458;
+        --brand-rgb: 162, 130, 93;
+        --brand-10: rgba(162, 130, 93, 0.1);
+        --brand-30: rgba(162, 130, 93, 0.3);
+      }
+      [data-theme="dark"] {
+        --bg: #1d1a16;
+        --surface: #28241f;
+        --surface-2: rgba(44, 40, 34, 0.8);
+        --border: #3a352e;
+        --brand: #b89567;
+        --accent-1: #6f6d5e;
+        --accent-2: #7d7461;
+        --accent-3: #8a7559;
+        --text: #e8e6df;
+        --text-muted: #a9a395;
+        --brand-rgb: 184, 149, 103;
+        --brand-10: rgba(184, 149, 103, 0.12);
+        --brand-30: rgba(184, 149, 103, 0.32);
+      }
+
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Exo 2", system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        transition: background 0.4s ease, color 0.4s ease;
+        background-image:
+          radial-gradient(900px 600px at 78% -8%, var(--brand-10), transparent 60%),
+          radial-gradient(700px 520px at 6% 18%, rgba(var(--brand-rgb), 0.06), transparent 55%);
+      }
+      h1, h2, h3, .heading { font-family: "Poppins", "Montserrat", sans-serif; }
+      ::selection { background: var(--brand); color: var(--bg); }
+
+      .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+      /* ---- Header ---- */
+      header {
+        position: fixed; inset: 0 0 auto 0; z-index: 40;
+        backdrop-filter: blur(6px);
+      }
+      header .bar {
+        max-width: 1120px; margin: 0 auto; padding: 16px 24px;
+        display: flex; align-items: center; justify-content: space-between;
+      }
+      .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); }
+      .logo .chip {
+        width: 36px; height: 36px; border-radius: 12px; background: var(--brand-10);
+        display: flex; align-items: center; justify-content: center; color: var(--brand);
+      }
+      .logo .word { font-family: "Poppins"; font-weight: 600; letter-spacing: 0.2em; font-size: 18px; }
+      .icon-btn {
+        width: 40px; height: 40px; border-radius: 999px; cursor: pointer;
+        background: var(--surface-2); border: 1px solid var(--border);
+        color: var(--text-muted); display: flex; align-items: center; justify-content: center;
+        transition: color 0.2s ease;
+      }
+      .icon-btn:hover { color: var(--brand); }
+
+      /* ---- Hero ---- */
+      .hero {
+        position: relative; min-height: 92vh; display: flex;
+        align-items: center; justify-content: center; overflow: hidden; text-align: center;
+      }
+      #globe { position: absolute; inset: 0; }
+      #globe canvas { width: 100%; height: 100%; display: block; }
+      .hero-wash {
+        position: absolute; inset: 0; pointer-events: none;
+        background: radial-gradient(60% 50% at 50% 46%, transparent 0%, var(--bg) 86%);
+      }
+      .hero-inner { position: relative; z-index: 10; padding: 0 24px; }
+      .pill {
+        display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px;
+        border: 1px solid var(--border); border-radius: 999px; padding: 6px 16px;
+        font-size: 12px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--text-muted);
+      }
+      .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--brand); animation: pulse 3.5s ease-in-out infinite; }
+      .hero h1 { font-size: clamp(40px, 7vw, 76px); font-weight: 600; line-height: 1.05; margin: 0; }
+      .hero h1 .accent { color: var(--brand); }
+      .hero p { max-width: 560px; margin: 24px auto 0; font-size: 18px; color: var(--text-muted); }
+      .btn {
+        display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+        background: var(--brand); color: var(--bg); border: none;
+        border-radius: 999px; padding: 12px 24px; margin-top: 36px;
+        font-family: "Poppins"; font-weight: 500; font-size: 14px; text-decoration: none;
+        box-shadow: 0 18px 50px -20px rgba(0,0,0,0.45); transition: transform 0.15s ease;
+      }
+      .btn:hover { transform: scale(1.03); }
+      .btn:active { transform: scale(0.96); }
+      .scroll-cue { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); }
+      .scroll-cue .mouse { display: block; width: 20px; height: 36px; border: 1px solid var(--border); border-radius: 999px; }
+      .scroll-cue .mouse i { display: block; width: 2px; height: 8px; margin: 6px auto 0; border-radius: 999px; background: var(--brand); animation: pulse 3.5s ease-in-out infinite; }
+
+      /* ---- Workspace ---- */
+      .workspace { padding: 24px 0 112px; }
+      .ws-head { display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
+      @media (min-width: 640px) { .ws-head { flex-direction: row; align-items: flex-end; justify-content: space-between; } }
+      .ws-head h2 { font-size: clamp(24px, 4vw, 30px); font-weight: 600; margin: 0; }
+      .ws-head p { margin: 4px 0 0; max-width: 520px; color: var(--text-muted); }
+
+      .add-wrap { position: relative; }
+      .menu {
+        position: absolute; right: 0; top: calc(100% + 12px); z-index: 30; width: 288px;
+        background: var(--surface-2); border: 1px solid var(--border); border-radius: 16px; padding: 8px;
+        backdrop-filter: blur(10px); box-shadow: 0 18px 50px -20px rgba(0,0,0,0.45);
+        animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both;
+      }
+      .menu[hidden] { display: none; }
+      .menu .label { padding: 6px 12px 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+      .menu button {
+        width: 100%; display: flex; align-items: center; gap: 12px; text-align: left;
+        background: none; border: none; cursor: pointer; padding: 10px 12px; border-radius: 12px; color: var(--text);
+      }
+      .menu button:hover { background: var(--brand-10); }
+      .menu .mi-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--brand-10); color: var(--brand); display: flex; align-items: center; justify-content: center; flex: none; }
+      .menu .mi-title { font-family: "Poppins"; font-weight: 500; font-size: 14px; display: block; }
+      .menu .mi-desc { font-size: 12px; color: var(--text-muted); display: block; }
+
+      .canvas-area { position: relative; }
+      #chains { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; }
+      .hub-wrap { position: relative; z-index: 10; max-width: 448px; margin: 0 auto 56px; }
+      .grid { position: relative; z-index: 10; display: grid; grid-template-columns: 1fr; gap: 24px; }
+      @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+
+      /* ---- Card ---- */
+      .card {
+        position: relative; border-radius: 16px; padding: 20px;
+        background: var(--surface-2); border: 1px solid var(--border);
+        backdrop-filter: blur(10px) saturate(120%);
+        box-shadow: 0 18px 50px -20px rgba(0,0,0,0.45);
+        transition: transform 0.2s ease, box-shadow 0.3s ease; will-change: transform;
+        animation: fadeUp 0.55s cubic-bezier(0.22,1,0.36,1) both;
+      }
+      .card:hover { box-shadow: 0 0 0 1px var(--brand-10), 0 18px 60px -24px var(--brand-30); }
+      .card.hub { box-shadow: 0 0 0 1px var(--brand-30), 0 18px 50px -20px rgba(0,0,0,0.45); }
+      .card .rule { position: absolute; left: 20px; right: 20px; top: 0; height: 1px; }
+      .card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+      .card-head .left { display: flex; align-items: center; gap: 12px; }
+      .card-ico { width: 40px; height: 40px; border-radius: 12px; background: var(--brand-10); color: var(--brand); display: flex; align-items: center; justify-content: center; }
+      .card h3 { font-size: 16px; font-weight: 600; margin: 0; line-height: 1.2; }
+      .card .sub { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+      .remove { background: none; border: none; cursor: pointer; color: var(--text-muted); opacity: 0; transition: opacity 0.2s ease; }
+      .card:hover .remove { opacity: 1; }
+      .remove:hover { color: var(--brand); }
+      .metric { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 12px; }
+      .metric .val { font-family: "Poppins"; font-size: 30px; font-weight: 600; line-height: 1; }
+      .metric .mlabel { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+      .delta { font-size: 12px; font-weight: 500; border-radius: 999px; padding: 2px 8px; background: var(--brand-10); }
+      .spark { width: 100%; height: 28px; display: block; }
+      .foot { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 12px; font-size: 12px; display: flex; flex-wrap: wrap; gap: 4px 20px; align-items: center; }
+      .foot .m { color: var(--text-muted); }
+      .foot .m b { color: var(--text); font-weight: 500; }
+      .foot .status { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); }
+      .foot .status .dot { width: 6px; height: 6px; }
+
+      footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; font-size: 14px; color: var(--text-muted); }
+
+      /* chains */
+      .chain-core { fill: none; stroke: var(--brand); stroke-opacity: 0.22; stroke-width: 1.5; }
+      .chain-links { fill: none; stroke: var(--brand); stroke-opacity: 0.7; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 0.5 11; animation: dash 1.6s linear infinite; }
+      .chain-pulse { fill: var(--brand); }
+
+      @keyframes pulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+      @keyframes fadeUp { 0% { opacity: 0; transform: translateY(16px) scale(0.98); } 100% { opacity: 1; transform: none; } }
+      @keyframes dash { to { stroke-dashoffset: -24; } }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="bar">
+        <a class="logo" href="#top">
+          <span class="chip" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="9.5" width="9" height="5" rx="2.5"/><rect x="12" y="9.5" width="9" height="5" rx="2.5"/></svg>
+          </span>
+          <span class="word">STANNECT</span>
+        </a>
+        <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme"></button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div id="globe"><canvas></canvas></div>
+        <div class="hero-wash"></div>
+        <div class="hero-inner" id="hero-text">
+          <span class="pill"><span class="dot"></span> Staying connected</span>
+          <h1>Where your business<br />meets <span class="accent">automation</span></h1>
+          <p>One connected workspace for every KPI, dashboard, and integration — all linked through your Stannect core.</p>
+          <a class="btn" href="#workspace">Open your workspace</a>
+        </div>
+        <div class="scroll-cue"><span class="mouse"><i></i></span></div>
+      </section>
+
+      <section class="workspace" id="workspace">
+        <div class="wrap">
+          <div class="ws-head">
+            <div>
+              <h2>Your Connected Workspace</h2>
+              <p>Every KPI, dashboard, and integration links back to your Stannect core. Add another whenever you connect a new piece of the business.</p>
+            </div>
+            <div class="add-wrap">
+              <button class="btn" id="add-btn" style="margin-top:0" aria-haspopup="menu" aria-expanded="false">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                Add card
+              </button>
+              <div class="menu" id="add-menu" role="menu" hidden></div>
+            </div>
+          </div>
+
+          <div class="canvas-area" id="canvas-area">
+            <svg id="chains" aria-hidden="true"></svg>
+            <div class="hub-wrap" id="hub-wrap"></div>
+            <div class="grid" id="grid"></div>
+          </div>
+        </div>
+      </section>
+
+      <footer>Stannect — Where Your Business Meets Automation.</footer>
+    </main>
+
+    <script>
+      (function () {
+        "use strict";
+        var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        /* ---------- Theme ---------- */
+        var sun = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>';
+        var moon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8z"/></svg>';
+        var html = document.documentElement;
+        try { var saved = localStorage.getItem("stannect-theme"); if (saved) html.setAttribute("data-theme", saved); } catch (e) {}
+        var toggle = document.getElementById("theme-toggle");
+        function paintToggle() { toggle.innerHTML = html.getAttribute("data-theme") === "dark" ? sun : moon; }
+        paintToggle();
+        toggle.addEventListener("click", function () {
+          var next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          html.setAttribute("data-theme", next);
+          try { localStorage.setItem("stannect-theme", next); } catch (e) {}
+          paintToggle();
+        });
+
+        /* ---------- Icons ---------- */
+        var icons = {
+          main: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="9.5" width="9" height="5" rx="2.5"/><rect x="12" y="9.5" width="9" height="5" rx="2.5"/></svg>',
+          kpi: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 15l4-4 3 3 6-7"/><path d="M20 7v4M20 7h-4"/></svg>',
+          dashboard: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>',
+          integration: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 6H15.5M6 8.5V15a3 3 0 0 0 3 3h6.5"/></svg>',
+          close: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>'
+        };
+        function accentVar(n) { return n === 2 ? "var(--accent-2)" : n === 3 ? "var(--accent-3)" : "var(--accent-1)"; }
+
+        /* ---------- Data ---------- */
+        var uid = 0;
+        function nid(p) { uid++; return p + "-" + Date.now().toString(36) + "-" + uid; }
+        var cards = [
+          { id: "hub-main", hub: true, kind: "main", title: "Main Dashboard", sub: "Stannect Core", accent: 1, status: "All systems connected",
+            primary: { val: "24", label: "Automations live", delta: "+3", dir: "up" }, rest: [{ label: "Connected sources", val: "6" }], trend: [8,10,9,12,14,13,16,18] },
+          { id: "kpi-rev", kind: "kpi", title: "Revenue", sub: "Month to date", accent: 1,
+            primary: { val: "$48.2k", label: "MTD", delta: "+12.4%", dir: "up" }, rest: [{ label: "Target", val: "78%" }], trend: [20,22,21,25,27,26,30,34,33,38] },
+          { id: "kpi-leads", kind: "kpi", title: "Leads", sub: "Pipeline health", accent: 2,
+            primary: { val: "312", label: "New", delta: "+8.1%", dir: "up" }, rest: [{ label: "Conversion", val: "21%", delta: "-1.2%", dir: "down" }], trend: [12,15,14,18,17,20,19,24,23,26] },
+          { id: "dash-ops", kind: "dashboard", title: "Operations", sub: "Live dashboard", accent: 3, status: "Updated 2m ago",
+            primary: { val: "57", label: "Jobs active" }, rest: [{ label: "On schedule", val: "92%", delta: "+4%", dir: "up" }], trend: [30,28,31,33,32,35,37,36,39,41] },
+          { id: "int-jt", kind: "integration", title: "JobTread", sub: "Integration", accent: 2, status: "Synced",
+            primary: { val: "1,204", label: "Records synced", delta: "+46", dir: "up" }, rest: [{ label: "Last sync", val: "Just now" }], trend: [5,9,7,12,11,15,14,18] }
+        ];
+
+        var templates = [
+          { key: "kpi", label: "User KPI", desc: "Track a single metric with trend", build: function () { return { id: nid("kpi"), kind: "kpi", title: "New KPI", sub: "Custom metric", accent: 1, primary: { val: "—", label: "Current" }, rest: [{ label: "Goal", val: "—" }], trend: [10,12,11,14,13,16,15,18] }; } },
+          { key: "dashboard", label: "Dashboard", desc: "A grouped view of several metrics", build: function () { return { id: nid("dash"), kind: "dashboard", title: "New Dashboard", sub: "Live dashboard", accent: 3, status: "Draft", primary: { val: "0", label: "Widgets" }, rest: [{ label: "Shared with", val: "—" }], trend: [20,22,21,24,26,25,28,30] }; } },
+          { key: "integration", label: "JobTread Integration", desc: "Connect an external source", build: function () { return { id: nid("int"), kind: "integration", title: "JobTread", sub: "Integration", accent: 2, status: "Connecting…", primary: { val: "Pending", label: "Status" }, rest: [{ label: "Records", val: "—" }], trend: [4,6,5,8,7,10,9,12] }; } },
+          { key: "custom", label: "Blank card", desc: "Start from an empty card", build: function () { return { id: nid("custom"), kind: "kpi", title: "Untitled", sub: "Custom", accent: 1, primary: { val: "—", label: "Metric" }, rest: [], trend: [10,11,10,12,11,13,12,14] }; } }
+        ];
+
+        /* ---------- Sparkline ---------- */
+        function sparkPath(data) {
+          var w = 100, h = 28, min = Math.min.apply(null, data), max = Math.max.apply(null, data);
+          var span = (max - min) || 1, step = w / (data.length - 1), pts = [];
+          for (var i = 0; i < data.length; i++) { pts.push([i * step, h - ((data[i] - min) / span) * h]); }
+          var line = pts.map(function (p, i) { return (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" ");
+          return { line: line, area: line + " L" + w + " " + h + " L0 " + h + " Z" };
+        }
+
+        /* ---------- Card render ---------- */
+        function deltaHtml(d) {
+          if (!d || !d.delta) return "";
+          var down = d.dir === "down";
+          return '<span class="delta" style="color:' + (down ? "var(--text-muted)" : "var(--brand)") + '">' + (down ? "▼" : "▲") + " " + d.delta + "</span>";
+        }
+        function cardHtml(c) {
+          var sp = sparkPath(c.trend);
+          var rest = (c.rest || []).map(function (m) {
+            var d = m.delta ? ' <span style="color:' + (m.dir === "down" ? "var(--text-muted)" : "var(--brand)") + '">' + (m.dir === "down" ? "▼" : "▲") + m.delta + "</span>" : "";
+            return '<span class="m">' + m.label + ': <b>' + m.val + "</b>" + d + "</span>";
+          }).join("");
+          var status = c.status ? '<span class="status"><span class="dot"></span>' + c.status + "</span>" : "";
+          var foot = (rest || status) ? '<div class="foot">' + rest + status + "</div>" : "";
+          var remove = c.hub ? "" : '<button class="remove" data-remove="' + c.id + '" aria-label="Remove ' + c.title + '">' + icons.close + "</button>";
+          return (
+            '<div class="card' + (c.hub ? " hub" : "") + '" data-card="' + c.id + '">' +
+              '<span class="rule" style="background:' + accentVar(c.accent) + '"></span>' +
+              '<div class="card-head"><div class="left">' +
+                '<span class="card-ico">' + icons[c.kind] + "</span>" +
+                "<div><h3>" + c.title + "</h3><div class=\"sub\">" + (c.sub || "") + "</div></div>" +
+              "</div>" + remove + "</div>" +
+              '<div class="metric"><div><div class="val">' + c.primary.val + '</div><div class="mlabel">' + (c.primary.label || "") + "</div></div>" + deltaHtml(c.primary) + "</div>" +
+              '<svg class="spark" viewBox="0 0 100 28" preserveAspectRatio="none" aria-hidden="true">' +
+                '<path d="' + sp.area + '" fill="var(--brand-10)"></path>' +
+                '<path d="' + sp.line + '" fill="none" stroke="var(--brand)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path>' +
+              "</svg>" + foot +
+            "</div>"
+          );
+        }
+
+        var hubWrap = document.getElementById("hub-wrap");
+        var grid = document.getElementById("grid");
+        var area = document.getElementById("canvas-area");
+        var chains = document.getElementById("chains");
+
+        function attachTilt(el) {
+          if (reduceMotion) return;
+          var raf;
+          el.addEventListener("pointermove", function (e) {
+            var r = el.getBoundingClientRect();
+            var px = (e.clientX - r.left) / r.width - 0.5;
+            var py = (e.clientY - r.top) / r.height - 0.5;
+            if (raf) cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(function () {
+              el.style.transform = "perspective(900px) rotateX(" + (-py * 5).toFixed(2) + "deg) rotateY(" + (px * 6).toFixed(2) + "deg) translateY(-2px)";
+            });
+          });
+          el.addEventListener("pointerleave", function () { if (raf) cancelAnimationFrame(raf); el.style.transform = ""; });
+        }
+
+        function render() {
+          var hub = cards.filter(function (c) { return c.hub; })[0] || cards[0];
+          var others = cards.filter(function (c) { return c !== hub; });
+          hubWrap.innerHTML = cardHtml(hub);
+          grid.innerHTML = others.map(cardHtml).join("");
+          // wire interactions
+          document.querySelectorAll("[data-card]").forEach(attachTilt);
+          document.querySelectorAll("[data-remove]").forEach(function (b) {
+            b.addEventListener("click", function () {
+              var id = b.getAttribute("data-remove");
+              cards = cards.filter(function (c) { return c.id !== id; });
+              render();
+            });
+          });
+          requestAnimationFrame(drawChains);
+        }
+
+        /* ---------- Chains ---------- */
+        function center(el) { return { x: el.offsetLeft + el.offsetWidth / 2, top: el.offsetTop, bottom: el.offsetTop + el.offsetHeight }; }
+        function drawChains() {
+          var hubEl = hubWrap.querySelector(".card");
+          if (!hubEl) return;
+          var hub = center(hubEl);
+          var hx = hub.x, hy = hub.bottom;
+          var cardEls = grid.querySelectorAll(".card");
+          var svg = "";
+          cardEls.forEach(function (el, i) {
+            var c = center(el);
+            var cx = c.x, cy = c.top + 4;
+            var mx = (hx + cx) / 2;
+            var my = (hy + cy) / 2 + Math.min(48, Math.abs(cx - hx) * 0.18);
+            var d = "M" + hx + " " + hy + " Q" + mx + " " + my + " " + cx + " " + cy;
+            var pid = "cp-" + i;
+            svg +=
+              '<path id="' + pid + '" d="' + d + '" fill="none" stroke="none"></path>' +
+              '<path class="chain-core" d="' + d + '"></path>' +
+              '<path class="chain-links" d="' + d + '"></path>' +
+              '<circle class="chain-pulse" r="2.6"><animateMotion dur="3.2s" repeatCount="indefinite" rotate="auto"><mpath href="#' + pid + '"></mpath></animateMotion></circle>';
+          });
+          chains.setAttribute("width", area.offsetWidth);
+          chains.setAttribute("height", area.offsetHeight);
+          chains.innerHTML = svg;
+        }
+        if (window.ResizeObserver) { new ResizeObserver(drawChains).observe(area); }
+        window.addEventListener("resize", drawChains);
+        if (document.fonts && document.fonts.ready) { document.fonts.ready.then(drawChains); }
+
+        /* ---------- Add menu ---------- */
+        var addBtn = document.getElementById("add-btn");
+        var menu = document.getElementById("add-menu");
+        menu.innerHTML = '<p class="label">Connect something new</p>' + templates.map(function (t) {
+          var k = t.key === "dashboard" ? "dashboard" : t.key === "integration" ? "integration" : "kpi";
+          return '<button data-tpl="' + t.key + '"><span class="mi-icon">' + icons[k] + '</span><span><span class="mi-title">' + t.label + '</span><span class="mi-desc">' + t.desc + "</span></span></button>";
+        }).join("");
+        function openMenu(o) { menu.hidden = !o; addBtn.setAttribute("aria-expanded", String(o)); }
+        addBtn.addEventListener("click", function (e) { e.stopPropagation(); openMenu(menu.hidden); });
+        menu.addEventListener("click", function (e) { e.stopPropagation(); });
+        document.addEventListener("click", function () { openMenu(false); });
+        document.addEventListener("keydown", function (e) { if (e.key === "Escape") openMenu(false); });
+        menu.querySelectorAll("[data-tpl]").forEach(function (b) {
+          b.addEventListener("click", function () {
+            var t = templates.filter(function (x) { return x.key === b.getAttribute("data-tpl"); })[0];
+            if (t) { cards.push(t.build()); render(); }
+            openMenu(false);
+          });
+        });
+
+        render();
+
+        /* ---------- Hero parallax ---------- */
+        var heroText = document.getElementById("hero-text");
+        var globeWrap = document.getElementById("globe");
+        var pT = { x: 0, y: 0 }, eT = { x: 0, y: 0 };
+        if (!reduceMotion) {
+          window.addEventListener("pointermove", function (e) {
+            pT.x = (e.clientX / window.innerWidth - 0.5) * 2;
+            pT.y = (e.clientY / window.innerHeight - 0.5) * 2;
+          }, { passive: true });
+          (function loop() {
+            eT.x += (pT.x - eT.x) * 0.08; eT.y += (pT.y - eT.y) * 0.08;
+            globeWrap.style.transform = "translate3d(" + (eT.x * -14) + "px," + (eT.y * -10) + "px,0)";
+            heroText.style.transform = "translate3d(" + (eT.x * 10) + "px," + (eT.y * 8) + "px,0)";
+            requestAnimationFrame(loop);
+          })();
+        }
+
+        /* ---------- Connection globe ---------- */
+        var canvas = document.querySelector("#globe canvas");
+        var ctx = canvas.getContext("2d");
+        var N = 540, golden = Math.PI * (3 - Math.sqrt(5)), pts = [];
+        for (var i = 0; i < N; i++) {
+          var y = 1 - (i / (N - 1)) * 2, r = Math.sqrt(1 - y * y), th = golden * i;
+          pts.push({ x: Math.cos(th) * r, y: y, z: Math.sin(th) * r, phase: Math.random() * Math.PI * 2 });
+        }
+        var edges = [], seen = {};
+        for (var a = 0; a < N; a++) {
+          var ds = [];
+          for (var b = 0; b < N; b++) { if (a === b) continue; var dx = pts[a].x - pts[b].x, dy = pts[a].y - pts[b].y, dz = pts[a].z - pts[b].z; ds.push({ j: b, d: dx*dx+dy*dy+dz*dz }); }
+          ds.sort(function (m, n) { return m.d - n.d; });
+          for (var k = 0; k < 3; k++) { var j = ds[k].j; var key = a < j ? a + "-" + j : j + "-" + a; if (!seen[key]) { seen[key] = 1; edges.push([a, j]); } }
+        }
+        var brand = "184, 149, 103";
+        function readBrand() { var v = getComputedStyle(document.documentElement).getPropertyValue("--brand-rgb").trim(); if (v) brand = v; }
+        readBrand();
+        new MutationObserver(readBrand).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+        var W = 0, H = 0, DPR = 1;
+        function resize() {
+          var rect = canvas.getBoundingClientRect();
+          DPR = Math.min(window.devicePixelRatio || 1, 2);
+          W = rect.width; H = rect.height;
+          canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
+          ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        }
+        resize();
+        if (window.ResizeObserver) { new ResizeObserver(resize).observe(canvas); } else { window.addEventListener("resize", resize); }
+
+        var angle = 0, proj = pts.map(function () { return { x: 0, y: 0, z: 0 }; });
+        function frame() {
+          if (!reduceMotion) angle += 0.0016;
+          var cx = W / 2 + eT.x * 22, cy = H * 0.46 + eT.y * 16, R = Math.min(W, H) * 0.42;
+          var tilt = -0.32 + eT.y * 0.18, ay = angle + eT.x * 0.25;
+          var cA = Math.cos(ay), sA = Math.sin(ay), cT = Math.cos(tilt), sT = Math.sin(tilt);
+          for (var i = 0; i < N; i++) {
+            var p = pts[i];
+            var xz = p.x * cA + p.z * sA, zz = -p.x * sA + p.z * cA;
+            var yy = p.y * cT - zz * sT, zt = p.y * sT + zz * cT;
+            proj[i].x = cx + xz * R; proj[i].y = cy + yy * R; proj[i].z = zt;
+          }
+          ctx.clearRect(0, 0, W, H);
+          ctx.lineWidth = 1;
+          for (var e = 0; e < edges.length; e++) {
+            var pa = proj[edges[e][0]], pb = proj[edges[e][1]], depth = (pa.z + pb.z) / 2;
+            if (depth < -0.55) continue;
+            var al = Math.max(0, (depth + 0.6) / 1.6) * 0.34;
+            ctx.strokeStyle = "rgba(" + brand + "," + al.toFixed(3) + ")";
+            ctx.beginPath(); ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y); ctx.stroke();
+          }
+          var t = performance.now() * 0.001;
+          for (var n = 0; n < N; n++) {
+            var pp = proj[n], front = (pp.z + 1) / 2;
+            var tw = reduceMotion ? 1 : 0.7 + 0.3 * Math.sin(t * 1.4 + pts[n].phase);
+            var alpha = (0.12 + front * 0.85) * tw, rad = 0.5 + front * 1.7;
+            ctx.beginPath(); ctx.fillStyle = "rgba(" + brand + "," + alpha.toFixed(3) + ")";
+            ctx.arc(pp.x, pp.y, rad, 0, Math.PI * 2); ctx.fill();
+          }
+          requestAnimationFrame(frame);
+        }
+        frame();
+      })();
+    </script>
+  </body>
+</html>
